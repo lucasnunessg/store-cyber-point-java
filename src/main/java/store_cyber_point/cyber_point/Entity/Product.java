@@ -15,14 +15,14 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private BigDecimal price;
+  private Double price;
   private String description;
   private String image;
 
   public Product() {
   }
 
-  public Product(String name, BigDecimal price, String description, String image) {
+  public Product(String name, Double price, String description, String image) {
     this.name = name;
     this.price = price;
     this.description = description;
@@ -45,11 +45,11 @@ public class Product {
     this.name = name;
   }
 
-  public BigDecimal getPrice() {
+  public Double getPrice() {
     return price;
   }
 
-  public void setPrice(BigDecimal price) {
+  public void setPrice(Double price) {
     this.price = price;
   }
 
