@@ -5,25 +5,27 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-public class Products {
+public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private byte price;
+  private BigDecimal price;
   private String description;
+  private String image;
 
-  public Products(){}
+  public Product(){}
 
-  public Products(Long id, String name, byte price, String description) {
-    this.id = id;
+  public Product(String name, BigDecimal price, String description, String image) {
     this.name = name;
     this.price = price;
     this.description = description;
+    this.image = image;
   }
 
   public Long getId() {
@@ -42,11 +44,11 @@ public class Products {
     this.name = name;
   }
 
-  public byte getPrice() {
+  public BigDecimal getPrice() {
     return price;
   }
 
-  public void setPrice(byte price) {
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
 
@@ -56,5 +58,13 @@ public class Products {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
   }
 }
