@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import store_cyber_point.cyber_point.Entity.Product;
 import store_cyber_point.cyber_point.repository.ProductRepository;
 
+
+//essa classe é independente a import.sql, aqui posso fazer mais inserções ao subir aplicação independente da import.sql
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
 
