@@ -19,7 +19,8 @@ public class Product {
   private String description;
   private String image;
 
-  public Product(){}
+  public Product() {
+  }
 
   public Product(String name, BigDecimal price, String description, String image) {
     this.name = name;

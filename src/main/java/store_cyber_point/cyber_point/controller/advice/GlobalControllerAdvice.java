@@ -8,6 +8,7 @@ import store_cyber_point.cyber_point.exception.ProductNotFoundException;
 
 @RestControllerAdvice
 public class GlobalControllerAdvice {
+
   @ExceptionHandler({ProductNotFoundException.class})
   public ResponseEntity<String> handleProductNotFound(RuntimeException ex) {
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
