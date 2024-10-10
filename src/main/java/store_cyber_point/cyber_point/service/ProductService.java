@@ -53,13 +53,9 @@ public class ProductService {
     return product;
   }
 
-  public Product getProductByname(String name) {
-    Optional<Product> product = productRepository.findByname(name);
-    if(product.isEmpty()){
-      throw  new ProductNotFoundException();
-    }
+  public Optional<Product> findProductByName(String name) {
 
-    return product.get();
+    return productRepository.findByname(name);
   }
 
 

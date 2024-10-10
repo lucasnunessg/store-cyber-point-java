@@ -1,5 +1,6 @@
 package store_cyber_point.cyber_point.controller;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,15 @@ public class ProductController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ProductDto createProduct(@RequestBody ProductCreateDto productCreateDto) {
-    return ProductDto.fromEntity(productService.create(productCreateDto.toEntity()));
+  public ResponseEntity<ProductDto> createProduct(@RequestBody ProductCreateDto productCreateDto) {
+    Optional<Product> existingProduct = productService.findProductByName(productCreateDto.name());
+
+    if (existingProduct.isPresent()) {
+    return ResponseEntity.ok(ProductDto.fromEntity(existingProduct.get()));
+    }
+
+ProductDto createdProduct = ProductDto.fromEntity(productService.create(productCreateDto.toEntity()));
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 
   }
 
