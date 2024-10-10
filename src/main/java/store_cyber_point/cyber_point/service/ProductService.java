@@ -1,5 +1,6 @@
 package store_cyber_point.cyber_point.service;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,23 @@ public class ProductService {
   public Product create(Product product) {
     return productRepository.save(product);
   }
+
+  public Product deleteProduct(Long id) {
+    Product product = findById(id);
+
+    productRepository.deleteById(id);
+
+    return product;
+  }
+
+  public Product getProductByname(String name) {
+    Optional<Product> product = productRepository.findByname(name);
+    if(product.isEmpty()){
+      throw  new ProductNotFoundException();
+    }
+
+    return product.get();
+  }
+
+
 }
