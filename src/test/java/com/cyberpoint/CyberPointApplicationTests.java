@@ -1,4 +1,4 @@
-package store_cyber_point.cyber_point;
+package com.cyberpoint;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

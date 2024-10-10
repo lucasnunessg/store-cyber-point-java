@@ -1,7 +1,6 @@
-package store_cyber_point.cyber_point.dto;
+package com.cyberpoint.dto;
 
-import java.math.BigDecimal;
-import store_cyber_point.cyber_point.Entity.Product;
+import com.cyberpoint.entity.Product;
 
 public record ProductCreateDto(String name, Double price, String description, String image) {
 

@@ -1,13 +1,15 @@
-package store_cyber_point.cyber_point.service;
+package com.cyberpoint.service;
 
+import com.cyberpoint.exception.ProductDuplicateException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import store_cyber_point.cyber_point.Entity.Product;
-import store_cyber_point.cyber_point.dto.ProductDto;
-import store_cyber_point.cyber_point.exception.ProductNotFoundException;
-import store_cyber_point.cyber_point.repository.ProductRepository;
+import com.cyberpoint.entity.Product;
+import com.cyberpoint.exception.ProductNotFoundException;
+import com.cyberpoint.repository.ProductRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductService {
@@ -42,7 +44,12 @@ public class ProductService {
   }
 
   public Product create(Product product) {
-    return productRepository.save(product);
+    try {
+      return productRepository.save(product);
+    } catch (DataIntegrityViolationException e) {
+      // Lidar com o erro de duplicidade
+      throw new ProductDuplicateException();
+    }
   }
 
   public Product deleteProduct(Long id) {

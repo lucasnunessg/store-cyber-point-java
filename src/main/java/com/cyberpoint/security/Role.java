@@ -1,4 +1,4 @@
-package store_cyber_point.cyber_point.security;
+package com.cyberpoint.security;
 
 public enum Role {
   ADMIN("ROLE_ADMIN"),
@@ -10,7 +10,7 @@ public enum Role {
     this.name = name;
   }
 
-  public String getName(){
+  public String getName() {
     return name;
   }
 }

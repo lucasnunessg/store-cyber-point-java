@@ -1,4 +1,4 @@
-package store_cyber_point.cyber_point.controller;
+package com.cyberpoint.controller;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import store_cyber_point.cyber_point.Entity.Product;
-import store_cyber_point.cyber_point.dto.ProductCreateDto;
-import store_cyber_point.cyber_point.dto.ProductDto;
-import store_cyber_point.cyber_point.exception.ProductNotFoundException;
-import store_cyber_point.cyber_point.service.ProductService;
+import com.cyberpoint.entity.Product;
+import com.cyberpoint.dto.ProductCreateDto;
+import com.cyberpoint.dto.ProductDto;
+import com.cyberpoint.exception.ProductNotFoundException;
+import com.cyberpoint.service.ProductService;
 
 @RestController
 @RequestMapping("/products")
@@ -36,11 +36,12 @@ public class ProductController {
   public ResponseEntity<ProductDto> createProduct(@RequestBody ProductCreateDto productCreateDto) {
     Optional<Product> existingProduct = productService.findProductByName(productCreateDto.name());
 
-    if (existingProduct.isPresent()) {
-    return ResponseEntity.ok(ProductDto.fromEntity(existingProduct.get()));
-    }
+    // if (existingProduct.isPresent()) {
+    // return ResponseEntity.ok(ProductDto.fromEntity(existingProduct.get()));
+    // }
 
-ProductDto createdProduct = ProductDto.fromEntity(productService.create(productCreateDto.toEntity()));
+    ProductDto createdProduct = ProductDto.fromEntity(
+        productService.create(productCreateDto.toEntity()));
     return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 
   }
@@ -68,7 +69,8 @@ ProductDto createdProduct = ProductDto.fromEntity(productService.create(productC
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws ProductNotFoundException { //dto nao é util aqui, so em get, post e put
+  public ResponseEntity<String> deleteProduct(@PathVariable Long id)
+      throws ProductNotFoundException { //dto nao é util aqui, so em get, post e put
     productService.deleteProduct(id);
     return ResponseEntity.ok("Produto deletado com sucesso!");
   }
