@@ -27,6 +27,8 @@ public class Person {
     this.address = address;
   }
 
+  public Person(){}
+
   public Long getId() {
     return id;
   }
