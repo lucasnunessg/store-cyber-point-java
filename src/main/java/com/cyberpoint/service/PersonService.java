@@ -44,5 +44,17 @@ public class PersonService {
 
   }
 
+  public Person updatePerson(Long id, Person person) {
+    Person persomFromDb = findPersonById(id);
+
+    persomFromDb.setFullname(person.getFullname());
+    persomFromDb.setAddress(person.getAddress());
+    persomFromDb.setEmail(person.getEmail());
+    persomFromDb.setUsername(person.getUsername());
+    persomFromDb.setPassword(person.getPassword());
+
+    return personRepository.save(persomFromDb);
+  }
+
 
 }
