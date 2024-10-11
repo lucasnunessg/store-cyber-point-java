@@ -20,5 +20,6 @@ public class GlobalControllerAdvice {
   public ResponseEntity<String> handleDuplicate(RuntimeException ex) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(ex.getMessage());
+
   }
 }
