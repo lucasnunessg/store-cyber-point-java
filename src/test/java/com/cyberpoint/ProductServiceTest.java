@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
-public class ProductRouteTest {
+public class ProductServiceTest {
 
   @Autowired
   ProductService productService;

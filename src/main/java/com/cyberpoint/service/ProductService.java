@@ -34,7 +34,6 @@ public class ProductService {
   public Product updateProduct(Long id, Product product) {
     Product productDb = findById(id);
 
-    productDb.setId(product.getId());
     productDb.setName(product.getName());
     productDb.setPrice(product.getPrice());
     productDb.setDescription(product.getDescription());
