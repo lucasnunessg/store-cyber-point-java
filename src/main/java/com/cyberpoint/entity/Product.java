@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +21,11 @@ public class Product {
   private Double price;
   private String description;
   private String image;
+
+  @ManyToOne
+  @JoinColumn(name = "person_id")
+  private Person person;
+
 
   public Product() {
   }
@@ -68,5 +75,13 @@ public class Product {
 
   public void setImage(String image) {
     this.image = image;
+  }
+
+  public Person getPerson() {
+    return person;
+  }
+
+  public void setPerson(Person person) {
+    this.person = person;
   }
 }
