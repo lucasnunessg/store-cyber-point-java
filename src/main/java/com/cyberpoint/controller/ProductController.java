@@ -88,9 +88,14 @@ public class ProductController {
     return ProductDto.fromEntity(productService.deleteProductPerson(productId));
   }
 
-  @GetMapping("/{productId}/persons)")
+  /*
+  Fazendo o get do relacionamento.
+   */
+
+  @GetMapping("/{productId}/persons")
   public ProductDto getAllProductsPersons(@PathVariable Long productId) {
-   return ProductDto.fromEntity(productService.)
+   Product product = productService.findByIdWithPerson(productId);
+   return ProductDto.fromEntity(product);
   }
 
 }

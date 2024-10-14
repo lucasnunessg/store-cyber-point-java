@@ -86,5 +86,10 @@ public class ProductService {
     return productRepository.save(product);
   }
 
+  public Product findByIdWithPerson(Long productId) {
+    return productRepository.findById(productId)
+        .orElseThrow(ProductNotFoundException::new);
+  }
+
 
 }
