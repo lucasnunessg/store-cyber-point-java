@@ -8,9 +8,10 @@ public record PersonDto(Long id, String fullname, String username, String email,
     return new PersonDto(
         person.getId(),
         person.getFullname(),
-        person.getAddress(),
+        person.getUsername(),
         person.getEmail(),
-        person.getUsername()
-    );
+        person.getAddress()
+
+        );
   }
 }

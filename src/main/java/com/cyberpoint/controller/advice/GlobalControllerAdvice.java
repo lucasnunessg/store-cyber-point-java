@@ -15,12 +15,12 @@ public class GlobalControllerAdvice {
   public ResponseEntity<String> handleNotFound(RuntimeException ex) {
     String message;
 
-    if(ex instanceof ProductNotFoundException) {
+    if (ex instanceof ProductNotFoundException) {
       message = "Produto não encontrado!";
     } else if (ex instanceof PersonNotFoundException) {
       message = "Usuário não encontrado!";
-      
-    }else {
+
+    } else {
       message = "Erro interno";
     }
     return ResponseEntity.status(HttpStatus.NOT_FOUND)

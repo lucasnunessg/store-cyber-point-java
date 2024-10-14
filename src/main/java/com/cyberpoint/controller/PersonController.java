@@ -34,14 +34,14 @@ public class PersonController {
 
   @GetMapping
   public List<PersonDto> getAllPerson() {
-  List<Person> persons = personService.findAll();
-  return persons.stream()
-      .map(PersonDto::fromEntity)
-      .toList();
+    List<Person> persons = personService.findAll();
+    return persons.stream()
+        .map(PersonDto::fromEntity)
+        .toList();
   }
 
   @GetMapping("/{id}")
-public PersonDto getById(@PathVariable Long id) {
+  public PersonDto getById(@PathVariable Long id) {
     return PersonDto.fromEntity(personService.findPersonById(id));
   }
 
@@ -52,7 +52,8 @@ public PersonDto getById(@PathVariable Long id) {
   }
 
   @PutMapping("/{id}")
-  public PersonDto updatePerson(@PathVariable Long id, @RequestBody PersonCreateDto personCreateDto) {
+  public PersonDto updatePerson(@PathVariable Long id,
+      @RequestBody PersonCreateDto personCreateDto) {
     return PersonDto.fromEntity(personService.updatePerson(id, personCreateDto.toEntity()));
   }
 

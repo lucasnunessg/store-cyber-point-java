@@ -1,6 +1,8 @@
 package com.cyberpoint.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +23,9 @@ public class Person {
   private String password;
   private String address;
 
+  @OneToMany(mappedBy = "person")
+  private List<Product> products;
+
   public Person(String fullname, String username, String email, String password,
       String address) {
     this.fullname = fullname;
@@ -30,7 +35,8 @@ public class Person {
     this.address = address;
   }
 
-  public Person(){}
+  public Person() {
+  }
 
   public Long getId() {
     return id;
@@ -78,5 +84,13 @@ public class Person {
 
   public void setAddress(String address) {
     this.address = address;
+  }
+
+  public List<Product> getProducts() {
+    return products;
+  }
+
+  public void setProducts(List<Product> products) {
+    this.products = products;
   }
 }

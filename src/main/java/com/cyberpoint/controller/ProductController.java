@@ -1,5 +1,6 @@
 package com.cyberpoint.controller;
 
+import com.cyberpoint.exception.PersonNotFoundException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,23 @@ public class ProductController {
       throws ProductNotFoundException { //dto nao é util aqui, so em get, post e put
     productService.deleteProduct(id);
     return ResponseEntity.ok("Produto deletado com sucesso!");
+  }
+
+  @PutMapping("/{productId}/persons/{personId}")
+  public ProductDto setProductPerson(@PathVariable Long productId, @PathVariable Long personId)
+      throws ProductNotFoundException, PersonNotFoundException {
+    return ProductDto.fromEntity(productService.setProductPerson(productId, personId)
+    );
+  }
+
+  @DeleteMapping("/{productId}/persons)")
+  public ProductDto deleteProductPerson(@PathVariable Long productId) throws ProductNotFoundException {
+    return ProductDto.fromEntity(productService.deleteProductPerson(productId));
+  }
+
+  @GetMapping("/{productId}/persons)")
+  public ProductDto getAllProductsPersons(@PathVariable Long productId) {
+   return ProductDto.fromEntity(productService.)
   }
 
 }

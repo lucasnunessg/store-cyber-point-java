@@ -26,7 +26,7 @@ public class PersonService {
   public Person findPersonById(Long id) {
     Optional<Person> person = personRepository.findById(id);
 
-    if(person.isEmpty()){
+    if (person.isEmpty()) {
       throw new PersonNotFoundException();
     }
     return person.get();

@@ -1,5 +1,7 @@
 package com.cyberpoint.service;
 
+import com.cyberpoint.entity.Person;
+import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
   private final ProductRepository productRepository;
+  private final PersonService personService;
 
   @Autowired
-  public ProductService(ProductRepository productRepository) {
+  public ProductService(ProductRepository productRepository, PersonService personService) {
     this.productRepository = productRepository;
+    this.personService = personService;
   }
 
 
@@ -62,6 +66,24 @@ public class ProductService {
   public Optional<Product> findProductByName(String name) {
 
     return productRepository.findByname(name);
+  }
+
+  public Product setProductPerson(Long productId, Long personId)
+      throws ProductNotFoundException, PersonNotFoundException {
+    Product product = findById(productId);
+    Person person = personService.findPersonById(personId);
+
+    product.setPerson(person);
+
+    return productRepository.save(product);
+  }
+
+  public Product deleteProductPerson(Long productId) throws ProductNotFoundException {
+    Product product = findById(productId);
+
+    product.setPerson(null);
+
+    return productRepository.save(product);
   }
 
 
