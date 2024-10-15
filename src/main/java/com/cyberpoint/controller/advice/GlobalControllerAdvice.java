@@ -1,6 +1,7 @@
 package com.cyberpoint.controller.advice;
 
 import com.cyberpoint.exception.NotFoundException;
+import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,13 @@ public class GlobalControllerAdvice {
 
   @ExceptionHandler({ProductDuplicateException.class})
   public ResponseEntity<String> handleDuplicate(RuntimeException ex) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(ex.getMessage());
+
+  }
+
+  @ExceptionHandler({PersonDuplicateException.class})
+  public ResponseEntity<String> handleDuplicatePerson(RuntimeException ex) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(ex.getMessage());
 

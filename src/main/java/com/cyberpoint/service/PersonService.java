@@ -1,6 +1,7 @@
 package com.cyberpoint.service;
 
 import com.cyberpoint.entity.Person;
+import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import java.util.List;
 import com.cyberpoint.repository.PersonRepository;
@@ -40,6 +41,9 @@ public class PersonService implements UserDetailsService {
     String hashedPassword = new BCryptPasswordEncoder()
         .encode(person.getPassword());
     person.setPassword(hashedPassword);
+    if(personRepository.existsByUsername(person.getUsername()) ){
+      throw new PersonDuplicateException("Usuário já existe!");
+    }
 
     return personRepository.save(person);
   }
@@ -48,6 +52,7 @@ public class PersonService implements UserDetailsService {
     Person person = findPersonById(id);
 
     personRepository.deleteById(id);
+
     return person;
 
   }
@@ -67,6 +72,7 @@ public class PersonService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return null;
+    return personRepository.findByusername(username)
+        .orElseThrow(() -> new UsernameNotFoundException(username));
   }
 }
