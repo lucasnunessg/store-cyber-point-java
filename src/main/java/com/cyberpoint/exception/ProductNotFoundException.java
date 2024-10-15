@@ -1,6 +1,6 @@
 package com.cyberpoint.exception;
 
-public class ProductNotFoundException extends RuntimeException {
+public class ProductNotFoundException extends NotFoundException {
 
   public ProductNotFoundException() {
 

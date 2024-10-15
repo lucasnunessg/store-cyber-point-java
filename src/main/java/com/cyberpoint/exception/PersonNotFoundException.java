@@ -1,6 +1,6 @@
 package com.cyberpoint.exception;
 
-public class PersonNotFoundException extends RuntimeException {
+public class PersonNotFoundException extends NotFoundException {
 
   public PersonNotFoundException() {
 

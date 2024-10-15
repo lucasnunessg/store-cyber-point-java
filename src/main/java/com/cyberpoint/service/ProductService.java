@@ -67,6 +67,9 @@ public class ProductService {
 
     return productRepository.findByname(name);
   }
+  /*
+  aqui começa o relacionamento, abaixo.
+   */
 
   public Product setProductPerson(Long productId, Long personId)
       throws ProductNotFoundException, PersonNotFoundException {

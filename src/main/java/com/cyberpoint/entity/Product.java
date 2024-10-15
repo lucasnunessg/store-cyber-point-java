@@ -20,6 +20,7 @@ public class Product {
   private String name;
   private Double price;
   private String description;
+  private String category;
   private String image;
 
   @ManyToOne
@@ -30,11 +31,13 @@ public class Product {
   public Product() {
   }
 
-  public Product(String name, Double price, String description, String image) {
+  public Product(String name, Double price, String description, String category, String image) {
     this.name = name;
     this.price = price;
     this.description = description;
+    this.category = category;
     this.image = image;
+
   }
 
   public Long getId() {
@@ -75,6 +78,14 @@ public class Product {
 
   public void setImage(String image) {
     this.image = image;
+  }
+
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
   }
 
   public Person getPerson() {

@@ -1,5 +1,6 @@
 package com.cyberpoint.controller.advice;
 
+import com.cyberpoint.exception.NotFoundException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
 import org.springframework.http.HttpStatus;
@@ -11,20 +12,12 @@ import com.cyberpoint.exception.ProductNotFoundException;
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
-  @ExceptionHandler({ProductNotFoundException.class, PersonNotFoundException.class})
-  public ResponseEntity<String> handleNotFound(RuntimeException ex) {
-    String message;
+  @ExceptionHandler()
+  public ResponseEntity<String> handleNotFound(NotFoundException ex) {
 
-    if (ex instanceof ProductNotFoundException) {
-      message = "Produto não encontrado!";
-    } else if (ex instanceof PersonNotFoundException) {
-      message = "Usuário não encontrado!";
 
-    } else {
-      message = "Erro interno";
-    }
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
-        .body(message);
+        .body(ex.getMessage());
   }
 
   @ExceptionHandler({ProductDuplicateException.class})
@@ -33,4 +26,14 @@ public class GlobalControllerAdvice {
         .body(ex.getMessage());
 
   }
+
+ /* @ExceptionHandler({ProductNotFoundException.class, PersonNotFoundException.class})
+  public ResponseEntity<String> handleNotFound(RuntimeException ex) {
+
+    // } else {
+    //   message = "Erro interno";
+    // }
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        .body(ex.getMessage());
+ }*/
 }

@@ -31,16 +31,16 @@ public class ProductServiceTest {
   @Test
   public void testProductService() {
     Product product = new Product();
-    product.setId(5L);
+    product.setId(10L);
     product.setName("Computador");
     product.setDescription("Computador bom");
     product.setImage("http");
     product.setPrice(2000d);
 
-    when(productRepository.findById(5L)).thenReturn(Optional.of(product));
+    when(productRepository.findById(10L)).thenReturn(Optional.of(product));
 
 
-    Product returnedProduct = productService.findById(5L);
+    Product returnedProduct = productService.findById(10L);
 
     assertEquals(returnedProduct.getId(), product.getId());
     assertEquals(returnedProduct.getName(), product.getName());
