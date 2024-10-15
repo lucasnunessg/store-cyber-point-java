@@ -1,5 +1,6 @@
 package com.cyberpoint.controller.advice;
 
+import com.cyberpoint.exception.EmailDuplicateException;
 import com.cyberpoint.exception.NotFoundException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
@@ -30,6 +31,13 @@ public class GlobalControllerAdvice {
 
   @ExceptionHandler({PersonDuplicateException.class})
   public ResponseEntity<String> handleDuplicatePerson(RuntimeException ex) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(ex.getMessage());
+
+  }
+
+  @ExceptionHandler({EmailDuplicateException.class})
+  public ResponseEntity<String> handleDuplicateEmail(RuntimeException ex) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(ex.getMessage());
 

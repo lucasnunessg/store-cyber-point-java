@@ -1,6 +1,7 @@
 package com.cyberpoint.service;
 
 import com.cyberpoint.entity.Person;
+import com.cyberpoint.exception.EmailDuplicateException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import java.util.List;
@@ -43,6 +44,9 @@ public class PersonService implements UserDetailsService {
     person.setPassword(hashedPassword);
     if(personRepository.existsByUsername(person.getUsername()) ){
       throw new PersonDuplicateException("Usuário já existe!");
+    }
+    if(personRepository.existsByemail(person.getEmail())) {
+      throw new EmailDuplicateException("E-mail já em uso");
     }
 
     return personRepository.save(person);

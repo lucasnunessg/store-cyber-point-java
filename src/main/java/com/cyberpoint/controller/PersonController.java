@@ -3,6 +3,7 @@ package com.cyberpoint.controller;
 import com.cyberpoint.dto.PersonCreateDto;
 import com.cyberpoint.dto.PersonDto;
 import com.cyberpoint.entity.Person;
+import com.cyberpoint.exception.EmailDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
 import com.cyberpoint.exception.ProductNotFoundException;
@@ -48,7 +49,7 @@ public class PersonController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED) //erro do usuario ja existe pega , preciso criar um jeito p pegar do email tb
-  public PersonDto create(@RequestBody PersonCreateDto personCreateDto) throws ProductDuplicateException {
+  public PersonDto create(@RequestBody PersonCreateDto personCreateDto) throws ProductDuplicateException, EmailDuplicateException {
     return PersonDto.fromEntity(personService.create(personCreateDto.toEntity()));
   }
 

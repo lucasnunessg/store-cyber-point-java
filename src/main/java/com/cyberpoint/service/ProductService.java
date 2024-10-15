@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.cyberpoint.entity.Product;
 import com.cyberpoint.exception.ProductNotFoundException;
 import com.cyberpoint.repository.ProductRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductService {
