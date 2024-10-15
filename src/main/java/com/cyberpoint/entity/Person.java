@@ -2,15 +2,18 @@ package com.cyberpoint.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
+import java.util.Collection;
 import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements UserDetails {
 
   @Id
   @GeneratedValue
@@ -55,9 +58,32 @@ public class Person {
     this.fullname = fullname;
   }
 
+  @Override
   public String getUsername() {
     return username;
   }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+  return true;
+  }
+
+
 
   public void setUsername(String username) {
     this.username = username;
@@ -71,6 +97,17 @@ public class Person {
     this.email = email;
   }
 
+ // @Override
+ // public Collection<? extends GrantedAuthority> getAuthorities() {
+ //   return List.of();
+ // }
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return List.of();
+  }
+
+  @Override
   public String getPassword() {
     return password;
   }
