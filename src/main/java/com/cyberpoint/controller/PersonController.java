@@ -46,7 +46,7 @@ public class PersonController {
   public PersonDto getById(@PathVariable Long id) {
     return PersonDto.fromEntity(personService.findPersonById(id));
   }
-
+  //criar hierarquia de duplicate!
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED) //erro do usuario ja existe pega , preciso criar um jeito p pegar do email tb
   public PersonDto create(@RequestBody PersonCreateDto personCreateDto) throws ProductDuplicateException, EmailDuplicateException {
