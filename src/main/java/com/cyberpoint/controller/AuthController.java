@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-  private final AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager; //ele quem verifica as credenciais e autentica as mesmas e faz a linha 29 dar certo.
 
   @Autowired
   public AuthController(AuthenticationManager authenticationManager) {
@@ -23,12 +23,12 @@ public class AuthController {
 
   @PostMapping("/login")
   public String login(@RequestBody AuthDto authDto) {
-    UsernamePasswordAuthenticationToken usernamePassword =
-        new UsernamePasswordAuthenticationToken(authDto.username(), authDto.password());
+    UsernamePasswordAuthenticationToken usernamePassword = //esse eu uso para pegar o que eu passei no Dto. Encapsula as credenciais.
+        new UsernamePasswordAuthenticationToken(authDto.username(), authDto.password()); //aqui eu posso passar email , basta acrescentar la no dto e repository.
 
-  Authentication auth =  authenticationManager.authenticate(usernamePassword);
+  Authentication auth = authenticationManager.authenticate(usernamePassword);
 
-  return "Login efetuado com sucesso: %s".formatted(auth.getName());
+  return "Login efetuado com sucesso: %s".formatted(auth.getName()); //criar exceção p login errado
   }
 
 }

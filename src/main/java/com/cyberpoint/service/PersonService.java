@@ -75,8 +75,10 @@ public class PersonService implements UserDetailsService {
 
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //entender o funcionamento disso, acho q posso criar buscas no db customizadas a partir de userdetailsService
     return personRepository.findByusername(username)
-        .orElseThrow(() -> new UsernameNotFoundException(username));
+        .orElseThrow(() -> new UsernameNotFoundException(username)); //pesqusiar como validar o que ta recebendo, se é email ou username.
   }
+
+
 }
