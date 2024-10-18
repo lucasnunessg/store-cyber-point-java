@@ -6,6 +6,7 @@ import com.cyberpoint.exception.NotFoundException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
+import com.cyberpoint.exception.UpdatePersonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -48,6 +49,12 @@ public class GlobalControllerAdvice {
   @ExceptionHandler({LoginErrorException.class})
   public ResponseEntity<String> handleLoginFailed(BadCredentialsException ex) {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(ex.getMessage());
+  }
+
+  @ExceptionHandler({UpdatePersonException.class})
+  public ResponseEntity<String> handleLoginFailed(BadCredentialsException ex) {
+    return ResponseEntity.status(HttpStatus.CONFLICT)
         .body(ex.getMessage());
   }
 

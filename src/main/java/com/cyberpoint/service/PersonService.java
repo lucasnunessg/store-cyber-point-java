@@ -2,6 +2,7 @@ package com.cyberpoint.service;
 
 import com.cyberpoint.entity.Person;
 import com.cyberpoint.exception.EmailDuplicateException;
+import com.cyberpoint.exception.LoginErrorException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import java.util.List;
@@ -63,14 +64,18 @@ public class PersonService implements UserDetailsService {
 
   public Person updatePerson(Long id, Person person) {
     Person persomFromDb = findPersonById(id);
+try {
+  persomFromDb.setFullname(person.getFullname());
+  persomFromDb.setAddress(person.getAddress());
+  persomFromDb.setEmail(person.getEmail());
+  persomFromDb.setUsername(person.getUsername());
+  persomFromDb.setPassword(person.getPassword());
 
-    persomFromDb.setFullname(person.getFullname());
-    persomFromDb.setAddress(person.getAddress());
-    persomFromDb.setEmail(person.getEmail());
-    persomFromDb.setUsername(person.getUsername());
-    persomFromDb.setPassword(person.getPassword());
+  return personRepository.save(persomFromDb);
+}catch(LoginErrorException ex) {
+  throw new LoginErrorException("Erro ao atualizar");
+}
 
-    return personRepository.save(persomFromDb);
   }
 
 

@@ -1,5 +1,6 @@
 package com.cyberpoint.entity;
 
+import com.cyberpoint.security.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import java.util.Collection;
@@ -25,6 +26,7 @@ public class Person implements UserDetails {
   private String email;
   private String password;
   private String address;
+  private Role role;
 
   @OneToMany(mappedBy = "person")
   private List<Product> products;
