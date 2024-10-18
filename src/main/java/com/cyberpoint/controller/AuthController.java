@@ -2,9 +2,12 @@ package com.cyberpoint.controller;
 
 import com.cyberpoint.dto.AuthDto;
 import com.cyberpoint.dto.TokenDto;
+import com.cyberpoint.exception.LoginErrorException;
 import com.cyberpoint.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,15 +29,20 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public TokenDto login(@RequestBody AuthDto authDto) {
-    UsernamePasswordAuthenticationToken usernamePassword = //esse eu uso para pegar o que eu passei no Dto. Encapsula as credenciais.
-        new UsernamePasswordAuthenticationToken(authDto.username(), authDto.password()); //aqui eu posso passar email , basta acrescentar la no dto e repository.
+  public ResponseEntity<TokenDto> login(@RequestBody AuthDto authDto) {
+    try {
+      UsernamePasswordAuthenticationToken usernamePassword =
+          new UsernamePasswordAuthenticationToken(authDto.username(), authDto.password());
 
-  Authentication auth = authenticationManager.authenticate(usernamePassword);
-  String token = tokenService.generateToken(auth.getName());
+      Authentication auth = authenticationManager.authenticate(usernamePassword);
 
-  return new TokenDto(token); //criar exceção p login errado
+      String token = tokenService.generateToken(auth.getName());
 
+      return ResponseEntity.ok(new TokenDto(token));
+
+    } catch (BadCredentialsException e) {
+      throw new LoginErrorException("Usuário ou senha incorretos.");
+    }
   }
 
 }

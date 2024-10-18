@@ -1,12 +1,14 @@
 package com.cyberpoint.controller.advice;
 
 import com.cyberpoint.exception.EmailDuplicateException;
+import com.cyberpoint.exception.LoginErrorException;
 import com.cyberpoint.exception.NotFoundException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.cyberpoint.exception.ProductNotFoundException;
@@ -41,6 +43,12 @@ public class GlobalControllerAdvice {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(ex.getMessage());
 
+  }
+
+  @ExceptionHandler({LoginErrorException.class})
+  public ResponseEntity<String> handleLoginFailed(BadCredentialsException ex) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(ex.getMessage());
   }
 
  /* @ExceptionHandler({ProductNotFoundException.class, PersonNotFoundException.class})
