@@ -133,4 +133,12 @@ public class Person implements UserDetails {
   public void setProducts(List<Product> products) {
     this.products = products;
   }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
 }
