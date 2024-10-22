@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.boot.CommandLineRunner;
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.cyberpoint.entity.Product;
 import com.cyberpoint.repository.ProductRepository;
@@ -18,9 +19,9 @@ public class DatabaseSeeder implements CommandLineRunner {
 
   private final ProductRepository productRepository;
   private final PersonRepository personRepository;
-  private final BCryptPasswordEncoder passwordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
-  public DatabaseSeeder(ProductRepository productRepository, PersonRepository personRepository, BCryptPasswordEncoder passwordEncoder) {
+  public DatabaseSeeder(ProductRepository productRepository, PersonRepository personRepository, PasswordEncoder passwordEncoder) {
     this.productRepository = productRepository;
     this.personRepository = personRepository;
     this.passwordEncoder = passwordEncoder;
