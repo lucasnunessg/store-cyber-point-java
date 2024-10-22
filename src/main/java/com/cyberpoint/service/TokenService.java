@@ -30,4 +30,11 @@ public class TokenService {
         .plus(1, ChronoUnit.DAYS);
   }
 
- }
+  public String validateToken(String token) {
+    return JWT.require(algorithm)
+        .build()
+        .verify(token)
+        .getSubject();
+  }
+
+}

@@ -84,7 +84,8 @@ public class ProductController {
   }
 
   @DeleteMapping("/{productId}/persons)")
-  public ProductDto deleteProductPerson(@PathVariable Long productId) throws ProductNotFoundException {
+  public ProductDto deleteProductPerson(@PathVariable Long productId)
+      throws ProductNotFoundException {
     return ProductDto.fromEntity(productService.deleteProductPerson(productId));
   }
 
@@ -94,8 +95,8 @@ public class ProductController {
 
   @GetMapping("/{productId}/persons")
   public ProductDto getAllProductsPersons(@PathVariable Long productId) {
-   Product product = productService.findByIdWithPerson(productId);
-   return ProductDto.fromEntity(product);
+    Product product = productService.findByIdWithPerson(productId);
+    return ProductDto.fromEntity(product);
   }
 
 }

@@ -32,12 +32,13 @@ public class Person implements UserDetails {
   private List<Product> products;
 
   public Person(String fullname, String username, String email, String password,
-      String address) {
+      String address, Role role) {
     this.fullname = fullname;
     this.username = username;
     this.email = email;
     this.password = password;
     this.address = address;
+    this.role = role;
 
   }
 
@@ -82,9 +83,8 @@ public class Person implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-  return true;
+    return true;
   }
-
 
 
   public void setUsername(String username) {
@@ -99,10 +99,10 @@ public class Person implements UserDetails {
     this.email = email;
   }
 
- // @Override
- // public Collection<? extends GrantedAuthority> getAuthorities() {
- //   return List.of();
- // }
+  // @Override
+  // public Collection<? extends GrantedAuthority> getAuthorities() {
+  //   return List.of();
+  // }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -20,7 +20,6 @@ public class GlobalControllerAdvice {
   @ExceptionHandler()
   public ResponseEntity<String> handleNotFound(NotFoundException ex) {
 
-
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
         .body(ex.getMessage());
   }
@@ -53,7 +52,7 @@ public class GlobalControllerAdvice {
   }
 
   @ExceptionHandler({UpdatePersonException.class})
-  public ResponseEntity<String> handleLoginFailed(BadCredentialsException ex) {
+  public ResponseEntity<String> handleUpdateFailed(BadCredentialsException ex) {
     return ResponseEntity.status(HttpStatus.CONFLICT)
         .body(ex.getMessage());
   }

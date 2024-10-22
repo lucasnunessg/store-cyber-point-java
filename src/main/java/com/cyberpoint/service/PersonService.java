@@ -43,10 +43,10 @@ public class PersonService implements UserDetailsService {
     String hashedPassword = new BCryptPasswordEncoder()
         .encode(person.getPassword());
     person.setPassword(hashedPassword);
-    if(personRepository.existsByUsername(person.getUsername()) ){
+    if (personRepository.existsByUsername(person.getUsername())) {
       throw new PersonDuplicateException("Usuário já existe!");
     }
-    if(personRepository.existsByemail(person.getEmail())) {
+    if (personRepository.existsByemail(person.getEmail())) {
       throw new EmailDuplicateException("E-mail já em uso");
     }
 
@@ -64,25 +64,27 @@ public class PersonService implements UserDetailsService {
 
   public Person updatePerson(Long id, Person person) {
     Person persomFromDb = findPersonById(id);
-try {
-  persomFromDb.setFullname(person.getFullname());
-  persomFromDb.setAddress(person.getAddress());
-  persomFromDb.setEmail(person.getEmail());
-  persomFromDb.setUsername(person.getUsername());
-  persomFromDb.setPassword(person.getPassword());
+    try {
+      persomFromDb.setFullname(person.getFullname());
+      persomFromDb.setAddress(person.getAddress());
+      persomFromDb.setEmail(person.getEmail());
+      persomFromDb.setUsername(person.getUsername());
+      persomFromDb.setPassword(person.getPassword());
 
-  return personRepository.save(persomFromDb);
-}catch(LoginErrorException ex) {
-  throw new LoginErrorException("Erro ao atualizar");
-}
+      return personRepository.save(persomFromDb);
+    } catch (LoginErrorException ex) {
+      throw new LoginErrorException("Erro ao atualizar");
+    }
 
   }
 
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //entender o funcionamento disso, acho q posso criar buscas no db customizadas a partir de userdetailsService
+  public UserDetails loadUserByUsername(String username)
+      throws UsernameNotFoundException { //entender o funcionamento disso, acho q posso criar buscas no db customizadas a partir de userdetailsService
     return personRepository.findByusername(username)
-        .orElseThrow(() -> new UsernameNotFoundException(username)); //pesqusiar como validar o que ta recebendo, se é email ou username.
+        .orElseThrow(() -> new UsernameNotFoundException(
+            username)); //pesqusiar como validar o que ta recebendo, se é email ou username.
   }
 
 
