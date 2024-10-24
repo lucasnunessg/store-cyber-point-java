@@ -11,7 +11,7 @@ public record ProductDto(Long id, String name, Double price, String description,
     PersonDto personDto = product.getPerson() != null ?
         PersonDto.fromEntity(product.getPerson()) : null;
 
-    return new ProductDto(+
+    return new ProductDto(
         product.getId(),
         product.getName(),
         product.getPrice(),
