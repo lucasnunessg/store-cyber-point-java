@@ -4,10 +4,12 @@ import com.cyberpoint.dto.PersonCreateDto;
 import com.cyberpoint.dto.PersonDto;
 import com.cyberpoint.entity.Person;
 import com.cyberpoint.exception.EmailDuplicateException;
+import com.cyberpoint.exception.FieldsEmptyException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
 import com.cyberpoint.exception.ProductNotFoundException;
 import com.cyberpoint.service.PersonService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,13 +53,14 @@ public class PersonController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   //erro do usuario ja existe pega , preciso criar um jeito p pegar do email tb
-  public PersonDto create(@RequestBody PersonCreateDto personCreateDto)
-      throws ProductDuplicateException, EmailDuplicateException {
+  public PersonDto create(@Valid @RequestBody PersonCreateDto personCreateDto)
+      throws ProductDuplicateException, EmailDuplicateException, FieldsEmptyException {
+
     return PersonDto.fromEntity(personService.create(personCreateDto.toEntity()));
   }
 
   @PutMapping("/{id}")
-  public PersonDto updatePerson(@PathVariable Long id,
+  public PersonDto updatePerson(@Valid @PathVariable Long id, //valid é para o spring entender as validações no dto
       @RequestBody PersonCreateDto personCreateDto) {
     return PersonDto.fromEntity(personService.updatePerson(id, personCreateDto.toEntity()));
   }

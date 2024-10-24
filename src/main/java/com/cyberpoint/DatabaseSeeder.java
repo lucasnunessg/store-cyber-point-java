@@ -21,7 +21,8 @@ public class DatabaseSeeder implements CommandLineRunner {
   private final PersonRepository personRepository;
   private final PasswordEncoder passwordEncoder;
 
-  public DatabaseSeeder(ProductRepository productRepository, PersonRepository personRepository, PasswordEncoder passwordEncoder) {
+  public DatabaseSeeder(ProductRepository productRepository, PersonRepository personRepository,
+      PasswordEncoder passwordEncoder) {
     this.productRepository = productRepository;
     this.personRepository = personRepository;
     this.passwordEncoder = passwordEncoder;
@@ -52,13 +53,16 @@ public class DatabaseSeeder implements CommandLineRunner {
   private List<Person> seedPerson() {
     List<Person> persons = new ArrayList<>();
 
-    persons.add(new Person("Lucas Nunes", "lucaspnunes1", "lucas@dev.com", passwordEncoder.encode("123456"),
+    persons.add(
+        new Person("Lucas Nunes", "lucaspnunes1", "lucas@dev.com", passwordEncoder.encode("123456"),
+            "R. Acioli Vaz de Andrade, 51, Andrade", Role.ADMIN));
+
+    persons.add(new Person("Julia Trindade Modernel", "jtm", "julia@gmail.com",
+        passwordEncoder.encode("123456"),
         "R. Acioli Vaz de Andrade, 51, Andrade", Role.ADMIN));
 
-    persons.add(new Person("Julia Trindade Modernel", "jtm", "julia@gmail.com", passwordEncoder.encode("123456"),
-        "R. Acioli Vaz de Andrade, 51, Andrade", Role.ADMIN));
-
-    persons.add(new Person("Cristian Nunes", "cristianpnunes", "cristian@gmail.com", passwordEncoder.encode("123456"),
+    persons.add(new Person("Cristian Nunes", "cristianpnunes", "cristian@gmail.com",
+        passwordEncoder.encode("123456"),
         "R. Acioli Vaz de Andrade, 51, Andrade", Role.CLIENT));
     return personRepository.saveAll(persons);
   }

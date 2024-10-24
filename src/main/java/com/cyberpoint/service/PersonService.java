@@ -2,6 +2,7 @@ package com.cyberpoint.service;
 
 import com.cyberpoint.entity.Person;
 import com.cyberpoint.exception.EmailDuplicateException;
+import com.cyberpoint.exception.FieldsEmptyException;
 import com.cyberpoint.exception.LoginErrorException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
@@ -40,9 +41,18 @@ public class PersonService implements UserDetailsService {
   }
 
   public Person create(Person person) {
-    String hashedPassword = new BCryptPasswordEncoder()
-        .encode(person.getPassword());
+    if (person.getEmail() == null || person.getEmail().isEmpty()) {
+      throw new FieldsEmptyException("Campo de email não pode ser vazio!");
+    }
+    if (person.getFullname() == null || person.getFullname().isEmpty()) {
+      throw new FieldsEmptyException("O nome não pode estar vazio!");
+    }
+
+    // Hash da senha
+    String hashedPassword = new BCryptPasswordEncoder().encode(person.getPassword());
     person.setPassword(hashedPassword);
+
+    // Verificações de duplicidade
     if (personRepository.existsByUsername(person.getUsername())) {
       throw new PersonDuplicateException("Usuário já existe!");
     }

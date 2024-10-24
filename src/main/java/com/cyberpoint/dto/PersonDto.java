@@ -3,7 +3,8 @@ package com.cyberpoint.dto;
 import com.cyberpoint.entity.Person;
 import com.cyberpoint.security.Role;
 
-public record PersonDto(Long id, String fullname, String username, String email, String address, Role role) {
+public record PersonDto(Long id, String fullname, String username, String email, String address,
+                        Role role) {
 
   public static PersonDto fromEntity(Person person) {
     return new PersonDto(
