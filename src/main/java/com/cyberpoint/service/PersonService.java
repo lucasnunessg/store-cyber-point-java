@@ -41,13 +41,6 @@ public class PersonService implements UserDetailsService {
   }
 
   public Person create(Person person) {
-    if (person.getEmail() == null || person.getEmail().isEmpty()) {
-      throw new FieldsEmptyException("Campo de email não pode ser vazio!");
-    }
-    if (person.getFullname() == null || person.getFullname().isEmpty()) {
-      throw new FieldsEmptyException("O nome não pode estar vazio!");
-    }
-
     // Hash da senha
     String hashedPassword = new BCryptPasswordEncoder().encode(person.getPassword());
     person.setPassword(hashedPassword);
