@@ -32,6 +32,9 @@ public class Person implements UserDetails {
   @OneToMany(mappedBy = "person")
   private List<Product> products;
 
+  @OneToMany(mappedBy = "person")
+  private List<Sales> sales;
+
   public Person(String fullname, String username, String email, String password,
       String address, Role role) {
     this.fullname = fullname;
@@ -141,5 +144,13 @@ public class Person implements UserDetails {
 
   public void setRole(Role role) {
     this.role = role;
+  }
+
+  public List<Sales> getSales() {
+    return sales;
+  }
+
+  public void setSales(List<Sales> sales) {
+    this.sales = sales;
   }
 }
