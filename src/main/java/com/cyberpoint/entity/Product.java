@@ -22,6 +22,7 @@ public class Product {
   private String description;
   private String category;
   private String image;
+  private Long quantify;
 
   @ManyToOne
   @JoinColumn(name = "person_id")
@@ -31,13 +32,22 @@ public class Product {
   public Product() {
   }
 
-  public Product(String name, Double price, String description, String category, String image) {
+  public Product(String name, Double price, String description, String category, String image, Long quantify) {
     this.name = name;
     this.price = price;
     this.description = description;
     this.category = category;
     this.image = image;
+    this.quantify = quantify;
 
+  }
+
+  public Long getQuantify() {
+    return quantify;
+  }
+
+  public void setQuantify(Long quantify) {
+    this.quantify = quantify;
   }
 
   public Long getId() {

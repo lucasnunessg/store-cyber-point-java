@@ -16,8 +16,7 @@ public class Sales {
 
   private LocalDateTime saleDate;
 
-  public Sales(Long id, LocalDateTime saleDate) {
-    this.id = id;
+  public Sales(LocalDateTime saleDate) {
     this.saleDate = LocalDateTime.now();
   }
 
