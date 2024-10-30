@@ -22,7 +22,8 @@ public class Sales {
   @JoinColumn(name = "person_id")
   private Person person;
 
-  public Sales() {}
+  public Sales() {
+  }
 
   public Sales(LocalDateTime saleDate) {
     this.saleDate = LocalDateTime.now();

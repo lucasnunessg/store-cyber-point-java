@@ -70,23 +70,23 @@ public class ProductService {
   aqui começa o relacionamento, abaixo.
    */
 
-  public Product setProductPerson(Long productId, Long personId)
-      throws ProductNotFoundException, PersonNotFoundException {
-    Product product = findById(productId);
-    Person person = personService.findPersonById(personId);
+  // public Product setProductPerson(Long productId, Long personId)
+  //    throws ProductNotFoundException, PersonNotFoundException {
+  // Product product = findById(productId);
+  // Person person = personService.findPersonById(personId);
 
-    product.setPerson(person);
+  // product.setPerson(person);
 
-    return productRepository.save(product);
-  }
+  // return productRepository.save(product);
+  // }
 
-  public Product deleteProductPerson(Long productId) throws ProductNotFoundException {
-    Product product = findById(productId);
+  // public Product deleteProductPerson(Long productId) throws ProductNotFoundException {
+  //  Product product = findById(productId);
 
-    product.setPerson(null);
+  //  product.setPerson(null);
 
-    return productRepository.save(product);
-  }
+  //  return productRepository.save(product);
+  // }
 
   public Product findByIdWithPerson(Long productId) {
     return productRepository.findById(productId)

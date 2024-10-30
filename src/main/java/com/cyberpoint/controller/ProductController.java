@@ -78,27 +78,27 @@ public class ProductController {
     return ResponseEntity.ok("Produto deletado com sucesso!");
   }
 
-  @PutMapping("/{productId}/persons/{personId}")
-  public ProductDto setProductPerson(@PathVariable Long productId, @PathVariable Long personId)
-      throws ProductNotFoundException, PersonNotFoundException {
-    return ProductDto.fromEntity(productService.setProductPerson(productId, personId)
-    );
-  }
+  // @PutMapping("/{productId}/persons/{personId}")
+  // public ProductDto setProductPerson(@PathVariable Long productId, @PathVariable Long personId)
+  //     throws ProductNotFoundException, PersonNotFoundException {
+  //  return ProductDto.fromEntity(productService.setProductPerson(productId, personId)
+  //  );
+  // }
 
-  @DeleteMapping("/{productId}/persons)")
-  public ProductDto deleteProductPerson(@PathVariable Long productId)
-      throws ProductNotFoundException {
-    return ProductDto.fromEntity(productService.deleteProductPerson(productId));
-  }
+  //  @DeleteMapping("/{productId}/persons)")
+  // public ProductDto deleteProductPerson(@PathVariable Long productId)
+//      throws ProductNotFoundException {
+  //   return ProductDto.fromEntity(productService.deleteProductPerson(productId));
+//  }
 
   /*
   Fazendo o get do relacionamento.
    */
 
-  @GetMapping("/{productId}/persons")
-  public ProductDto getAllProductsPersons(@PathVariable Long productId) {
-    Product product = productService.findByIdWithPerson(productId);
-    return ProductDto.fromEntity(product);
-  }
+  // @GetMapping("/{productId}/persons")
+  // public ProductDto getAllProductsPersons(@PathVariable Long productId) {
+  //  Product product = productService.findByIdWithPerson(productId);
+  //  return ProductDto.fromEntity(product);
+  // }
 
 }

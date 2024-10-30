@@ -60,7 +60,8 @@ public class PersonController {
   }
 
   @PutMapping("/{id}")
-  public PersonDto updatePerson(@Valid @PathVariable Long id, //valid é para o spring entender as validações no dto
+  public PersonDto updatePerson(@Valid @PathVariable Long id,
+      //valid é para o spring entender as validações no dto
       @RequestBody PersonCreateDto personCreateDto) {
     return PersonDto.fromEntity(personService.updatePerson(id, personCreateDto.toEntity()));
   }

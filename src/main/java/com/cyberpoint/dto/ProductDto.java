@@ -4,12 +4,9 @@ import com.cyberpoint.entity.Product;
 import com.cyberpoint.service.PersonService;
 
 public record ProductDto(Long id, String name, Double price, String description, String category,
-                         String image, Long quantify, PersonDto person) {
+                         String image, Long quantify) {
 
   public static ProductDto fromEntity(Product product) {
-
-    PersonDto personDto = product.getPerson() != null ?
-        PersonDto.fromEntity(product.getPerson()) : null;
 
     return new ProductDto(
         product.getId(),
@@ -18,8 +15,7 @@ public record ProductDto(Long id, String name, Double price, String description,
         product.getDescription(),
         product.getCategory(),
         product.getImage(),
-        product.getQuantify(),
-        personDto
+        product.getQuantify()
     );
   }
 

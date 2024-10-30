@@ -24,15 +24,12 @@ public class Product {
   private String image;
   private Long quantify;
 
-  @ManyToOne
-  @JoinColumn(name = "person_id")
-  private Person person;
-
 
   public Product() {
   }
 
-  public Product(String name, Double price, String description, String category, String image, Long quantify) {
+  public Product(String name, Double price, String description, String category, String image,
+      Long quantify) {
     this.name = name;
     this.price = price;
     this.description = description;
@@ -98,11 +95,4 @@ public class Product {
     this.category = category;
   }
 
-  public Person getPerson() {
-    return person;
-  }
-
-  public void setPerson(Person person) {
-    this.person = person;
-  }
 }
