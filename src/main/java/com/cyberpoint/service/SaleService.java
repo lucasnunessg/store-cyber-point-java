@@ -1,6 +1,8 @@
 package com.cyberpoint.service;
 
+import com.cyberpoint.entity.Person;
 import com.cyberpoint.entity.Sales;
+import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.SaleNotFoundException;
 import com.cyberpoint.repository.SalesRepository;
 import java.util.Optional;
@@ -12,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class SaleService {
 
   SalesRepository salesRepository;
+  PersonService personService;
 
   @Autowired
-  public SaleService(SalesRepository salesRepository) {
+  public SaleService(SalesRepository salesRepository, PersonService personService) {
     this.salesRepository = salesRepository;
+    this.personService = personService;
   }
 
   public List<Sales> findAll() {
@@ -52,6 +56,23 @@ public class SaleService {
     salesFromDb.setPerson(sales.getPerson());
 
     return salesRepository.save(salesFromDb);
+  }
+
+  public Sales setSalePerson(Long saleId, Long personId) throws SaleNotFoundException, PersonNotFoundException {
+    Sales sales = findSaleById(saleId);
+    Person person = personService.findPersonById(personId);
+
+    sales.setPerson(person);
+
+    return salesRepository.save(sales);
+  }
+
+  public Sales deleteSalePerson(Long saleId) {
+    Sales sales = findSaleById(saleId);
+
+    sales.setPerson(null);
+
+    return salesRepository.save(sales);
   }
 
 }

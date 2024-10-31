@@ -4,9 +4,9 @@ import com.cyberpoint.entity.Person;
 import com.cyberpoint.entity.Sales;
 import java.time.LocalDateTime;
 
-public record SalesCreateDto(LocalDateTime saleDate) {
+public record SalesCreateDto() {
 
   public Sales toEntity() {
-    return new Sales(saleDate);
+    return new Sales(LocalDateTime.now());
   }
 }

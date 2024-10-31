@@ -7,6 +7,7 @@ import com.cyberpoint.exception.NotFoundException;
 import com.cyberpoint.exception.PersonDuplicateException;
 import com.cyberpoint.exception.PersonNotFoundException;
 import com.cyberpoint.exception.ProductDuplicateException;
+import com.cyberpoint.exception.SaleNotFoundException;
 import com.cyberpoint.exception.UpdatePersonException;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +59,12 @@ public class GlobalControllerAdvice {
   @ExceptionHandler({UpdatePersonException.class})
   public ResponseEntity<String> handleUpdateFailed(BadCredentialsException ex) {
     return ResponseEntity.status(HttpStatus.CONFLICT)
+        .body(ex.getMessage());
+  }
+
+  @ExceptionHandler({SaleNotFoundException.class})
+  public ResponseEntity<String> handleSalesNotFound(RuntimeException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
         .body(ex.getMessage());
   }
 
