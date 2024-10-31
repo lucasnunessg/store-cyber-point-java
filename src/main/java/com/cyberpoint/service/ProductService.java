@@ -41,6 +41,8 @@ public class ProductService {
     productDb.setPrice(product.getPrice());
     productDb.setDescription(product.getDescription());
     productDb.setImage(product.getImage());
+    productDb.setQuantify(product.getQuantify());
+    productDb.setCategory(product.getCategory());
 
     return productRepository.save(productDb);
   }
