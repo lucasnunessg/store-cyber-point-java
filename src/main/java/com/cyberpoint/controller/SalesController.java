@@ -40,9 +40,7 @@ public class SalesController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public SalesDto create(@RequestBody SalesCreateDto salesCreateDto) throws SaleNotFoundException {
-    Sales sales = salesCreateDto.toEntity(); // Cria a entidade Sales
-    Sales createdSale = saleService.createSale(sales); // Salva a venda
-    return SalesDto.fromEntity(createdSale); // Retorna a venda criada como DTO
+  return SalesDto.fromEntity(saleService.createSale(salesCreateDto.toEntity()));
   }
 
   @GetMapping
@@ -69,19 +67,10 @@ public class SalesController {
     return ResponseEntity.ok("Venda deletada com sucesso!");
   }
 
-  @PostMapping("/{saleId}/persons")
+  @PutMapping("/{saleId}/persons/{personId}")
   @ResponseStatus(HttpStatus.CREATED)
-  public PersonDto createSalePerson(@PathVariable Long saleId, @RequestBody PersonCreateDto personCreateDto) {
-   Sales sales = saleService.findSaleById(saleId);
-   if (sales == null) {
-     throw new SaleNotFoundException("Venda não encontrada!");
-   }
-   Person newPerson = personCreateDto.toEntity();
-   newPerson = personService.create(newPerson);
-   sales.setPerson(newPerson);
-   saleService.updateSale(sales.getId(), sales);
-
-   return PersonDto.fromEntity(newPerson);
+  public SalesDto createSalePerson(@PathVariable Long saleId, @PathVariable Long personId) {
+  return SalesDto.fromEntity(saleService.setSalePerson(saleId, personId));
   }
 
   @DeleteMapping("/{saleId}/persons")
