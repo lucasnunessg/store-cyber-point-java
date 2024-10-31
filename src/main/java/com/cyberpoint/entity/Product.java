@@ -6,7 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import java.util.List;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +25,9 @@ public class Product {
   private String category;
   private String image;
   private Long quantify;
+
+  @OneToMany(mappedBy = "product")
+  private List<SaleItem> saleItems;
 
 
   public Product() {

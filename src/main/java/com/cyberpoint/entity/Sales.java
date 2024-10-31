@@ -4,7 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import java.util.List;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -21,6 +23,9 @@ public class Sales {
   @ManyToOne
   @JoinColumn(name = "person_id")
   private Person person;
+
+  @OneToMany(mappedBy = "sale")
+  private List<SaleItem> saleItems;
 
   public Sales() {
   }
@@ -53,5 +58,13 @@ public class Sales {
 
   public void setPerson(Person person) {
     this.person = person;
+  }
+
+  public List<SaleItem> getSaleItems() {
+    return saleItems;
+  }
+
+  public void setSaleItems(List<SaleItem> saleItems) {
+    this.saleItems = saleItems;
   }
 }
