@@ -59,4 +59,12 @@ public class SaleItem {
   public void setSale(Sales sale) {
     this.sale = sale;
   }
+
+  public Product getProduct() {
+    return product;
+  }
+
+  public void setProduct(Product product) {
+    this.product = product;
+  }
 }

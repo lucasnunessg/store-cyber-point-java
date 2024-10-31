@@ -24,7 +24,7 @@ public class SaleItemService {
 
   }
 
-  public SaleItem findiById(Long id) {
+  public SaleItem findSaleItemById(Long id) {
     Optional<SaleItem> saleItem = saleItemRepository.findById(id);
 
     if(saleItem.isEmpty()) {
@@ -32,6 +32,24 @@ public class SaleItemService {
     }
 
     return saleItem.get();
+  }
+
+  public SaleItem updateSaleItem(Long id, SaleItem saleItem) {
+    SaleItem saleItemFromDb = findSaleItemById(id);
+
+    saleItemFromDb.setSale(saleItem.getSale());
+    saleItemFromDb.setQuantify(saleItem.getQuantify());
+    saleItemFromDb.setProduct(saleItem.getProduct());
+
+    return saleItemRepository.save(saleItemFromDb);
+  }
+
+  public SaleItem deleteById(Long id) {
+    SaleItem sale = findSaleItemById(id);
+
+    saleItemRepository.deleteById(id);
+    return sale;
+
   }
 
 
