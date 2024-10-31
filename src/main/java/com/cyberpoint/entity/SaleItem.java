@@ -26,7 +26,9 @@ public class SaleItem {
   private Product product;
 
 
-  public SaleItem(){}
+  public SaleItem() {
+  }
+
 
   public SaleItem(int quantify, Sales sale, Product product) {
     this.quantify = quantify;

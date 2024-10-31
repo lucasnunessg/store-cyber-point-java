@@ -40,7 +40,7 @@ public class SalesController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public SalesDto create(@RequestBody SalesCreateDto salesCreateDto) throws SaleNotFoundException {
-  return SalesDto.fromEntity(saleService.createSale(salesCreateDto.toEntity()));
+    return SalesDto.fromEntity(saleService.createSale(salesCreateDto.toEntity()));
   }
 
   @GetMapping
@@ -70,7 +70,7 @@ public class SalesController {
   @PutMapping("/{saleId}/persons/{personId}")
   @ResponseStatus(HttpStatus.CREATED)
   public SalesDto createSalePerson(@PathVariable Long saleId, @PathVariable Long personId) {
-  return SalesDto.fromEntity(saleService.setSalePerson(saleId, personId));
+    return SalesDto.fromEntity(saleService.setSalePerson(saleId, personId));
   }
 
   @DeleteMapping("/{saleId}/persons")

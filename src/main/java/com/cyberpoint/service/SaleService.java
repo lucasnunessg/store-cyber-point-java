@@ -29,7 +29,7 @@ public class SaleService {
   public Sales findSaleById(Long id) {
     Optional<Sales> sale = salesRepository.findById(id);
 
-    if(sale.isEmpty()) {
+    if (sale.isEmpty()) {
       throw new SaleNotFoundException("Não encontrado!");
     }
 
@@ -37,11 +37,11 @@ public class SaleService {
   }
 
   public Sales deleteById(Long id) {
-   Sales sales = findSaleById(id);
+    Sales sales = findSaleById(id);
 
-   salesRepository.deleteById(id);
+    salesRepository.deleteById(id);
 
-   return sales;
+    return sales;
   }
 
   public Sales createSale(Sales sales) {
@@ -58,7 +58,8 @@ public class SaleService {
     return salesRepository.save(salesFromDb);
   }
 
-  public Sales setSalePerson(Long saleId, Long personId) throws SaleNotFoundException, PersonNotFoundException {
+  public Sales setSalePerson(Long saleId, Long personId)
+      throws SaleNotFoundException, PersonNotFoundException {
     Sales sales = findSaleById(saleId);
     Person person = personService.findPersonById(personId);
 
