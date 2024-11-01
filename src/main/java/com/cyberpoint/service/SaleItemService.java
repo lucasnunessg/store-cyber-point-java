@@ -84,4 +84,12 @@ public class SaleItemService {
     return saleItemRepository.save(saleItem);
   }
 
+  public SaleItem deleteSaleItemAndSale(Long saleItemId) {
+    SaleItem saleI = findSaleItemById(saleItemId);
+
+    saleI.setSale(null);
+
+    return saleItemRepository.save(saleI);
+  }
+
 }
