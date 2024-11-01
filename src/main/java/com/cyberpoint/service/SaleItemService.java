@@ -1,6 +1,8 @@
 package com.cyberpoint.service;
 
+import com.cyberpoint.entity.Product;
 import com.cyberpoint.entity.SaleItem;
+import com.cyberpoint.entity.Sales;
 import com.cyberpoint.exception.SaleNotFoundException;
 import com.cyberpoint.repository.SaleItemRepository;
 import java.util.Optional;
@@ -12,10 +14,14 @@ import java.util.List;
 public class SaleItemService {
 
   SaleItemRepository saleItemRepository;
+  ProductService productService;
+  SaleService saleService;
 
   @Autowired
-  public SaleItemService(SaleItemRepository saleItemRepository) {
+  public SaleItemService(SaleItemRepository saleItemRepository, ProductService productService, SaleService saleService) {
     this.saleItemRepository = saleItemRepository;
+    this.productService = productService;
+    this.saleService = saleService;
   }
 
   public List<SaleItem> findAll() {
@@ -52,5 +58,30 @@ public class SaleItemService {
 
   }
 
+  public SaleItem setSaleItemAndProduct(Long saleItemId, Long productId) {
+    SaleItem saleItem = findSaleItemById(saleItemId);
+    Product product = productService.findById(productId);
+
+    saleItem.setProduct(product);
+
+    return saleItemRepository.save(saleItem);
+  }
+
+  public SaleItem deleteSaleItemProduct(Long saleItemId) {
+    SaleItem saleItem = findSaleItemById(saleItemId);
+
+    saleItem.setProduct(null);
+
+   return saleItemRepository.save(saleItem);
+  }
+
+  public SaleItem setSaleItemAndSale(Long saleItemId, Long saleId) {
+    SaleItem saleItem = findSaleItemById(saleItemId);
+    Sales sales = saleService.findSaleById(saleId);
+
+    saleItem.setSale(sales);
+
+    return saleItemRepository.save(saleItem);
+  }
 
 }
