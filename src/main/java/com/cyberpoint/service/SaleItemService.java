@@ -18,7 +18,8 @@ public class SaleItemService {
   SaleService saleService;
 
   @Autowired
-  public SaleItemService(SaleItemRepository saleItemRepository, ProductService productService, SaleService saleService) {
+  public SaleItemService(SaleItemRepository saleItemRepository, ProductService productService,
+      SaleService saleService) {
     this.saleItemRepository = saleItemRepository;
     this.productService = productService;
     this.saleService = saleService;
@@ -27,13 +28,16 @@ public class SaleItemService {
   public List<SaleItem> findAll() {
     return saleItemRepository.findAll();
 
+  }
 
+  public SaleItem createSaleI(SaleItem saleItem) {
+    return saleItemRepository.save(saleItem);
   }
 
   public SaleItem findSaleItemById(Long id) {
     Optional<SaleItem> saleItem = saleItemRepository.findById(id);
 
-    if(saleItem.isEmpty()) {
+    if (saleItem.isEmpty()) {
       throw new SaleNotFoundException("Produto não encontrado!");
     }
 
@@ -72,7 +76,7 @@ public class SaleItemService {
 
     saleItem.setProduct(null);
 
-   return saleItemRepository.save(saleItem);
+    return saleItemRepository.save(saleItem);
   }
 
   public SaleItem setSaleItemAndSale(Long saleItemId, Long saleId) {

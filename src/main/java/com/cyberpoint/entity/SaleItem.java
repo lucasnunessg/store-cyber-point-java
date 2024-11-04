@@ -15,7 +15,7 @@ public class SaleItem {
   @GeneratedValue
   private Long id;
 
-  private int quantify;
+  private Long quantify;
 
   @ManyToOne
   @JoinColumn(name = "sale_id")
@@ -30,10 +30,9 @@ public class SaleItem {
   }
 
 
-  public SaleItem(int quantify, Sales sale, Product product) {
+  public SaleItem(Long quantify) {
     this.quantify = quantify;
-    this.sale = sale;
-    this.product = product;
+
   }
 
   public Long getId() {
@@ -44,11 +43,11 @@ public class SaleItem {
     this.id = id;
   }
 
-  public int getQuantify() {
+  public Long getQuantify() {
     return quantify;
   }
 
-  public void setQuantify(int quantify) {
+  public void setQuantify(Long quantify) {
     this.quantify = quantify;
   }
 
