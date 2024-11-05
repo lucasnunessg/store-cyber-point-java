@@ -67,7 +67,7 @@ public class SalesController {
     return ResponseEntity.ok("Venda deletada com sucesso!");
   }
 
-  @PutMapping("/{saleId}/persons/{personId}")
+  @PostMapping("/{saleId}/persons/{personId}")
   @ResponseStatus(HttpStatus.CREATED)
   public SalesDto createSalePerson(@PathVariable Long saleId, @PathVariable Long personId) {
     return SalesDto.fromEntity(saleService.setSalePerson(saleId, personId));
