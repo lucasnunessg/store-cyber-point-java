@@ -4,13 +4,19 @@ import com.cyberpoint.dto.SaleItemCreateDto;
 import com.cyberpoint.dto.SaleItemDto;
 import com.cyberpoint.dto.SalesCreateDto;
 import com.cyberpoint.dto.SalesDto;
+import com.cyberpoint.entity.Product;
 import com.cyberpoint.entity.SaleItem;
+import com.cyberpoint.entity.Sales;
+import com.cyberpoint.exception.ProductNotFoundException;
+import com.cyberpoint.exception.SaleNotFoundException;
 import com.cyberpoint.service.ProductService;
 import com.cyberpoint.service.SaleItemService;
 import com.cyberpoint.service.SaleService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,4 +64,34 @@ public class SaleItemController {
   public SaleItemDto updateSaleI(@PathVariable Long id, @RequestBody SaleItemCreateDto saleItemCreateDto) {
     return SaleItemDto.fromEntity(saleItemService.updateSaleItem(id, saleItemCreateDto.toEntity()));
   }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<String> deleteSaleI(@PathVariable Long id) {
+    saleItemService.deleteById(id);
+    return ResponseEntity.ok("Deletado com sucesso!");
+  }
+
+  @PostMapping("/sales/{saleId}/product/{productId}")
+  public SaleItemDto createSaleIProduct(@PathVariable Long saleId, @PathVariable Long productId, @RequestBody SaleItemCreateDto saleItemCreateDto) {
+    Sales sales = saleService.findSaleById(saleId);
+    if (sales == null) {
+      throw new SaleNotFoundException("Venda não encontrada!");
+    }
+
+    Product product = productService.findById(productId);
+    if (product == null) {
+      throw new ProductNotFoundException();
+    }
+
+
+    SaleItem saleItem = new SaleItem();
+    saleItem.setSale(sales);
+    saleItem.setProduct(product);
+    saleItem.setQuantify(saleItemCreateDto.quantify());
+
+    return SaleItemDto.fromEntity(saleItemService.createSaleI(saleItem));
+
+
+  }
+
 }

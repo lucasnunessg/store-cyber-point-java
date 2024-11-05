@@ -42,6 +42,8 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST, "/sales").permitAll()
             .requestMatchers(HttpMethod.GET, "/sales").permitAll()
             .requestMatchers(HttpMethod.GET, "/sales/{id}").permitAll()
+            .requestMatchers(HttpMethod.GET, "sale-product").permitAll()
+
             .anyRequest().authenticated()
         )
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
