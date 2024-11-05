@@ -61,7 +61,8 @@ public class SaleItemController {
   }
 
   @PutMapping("/{id}")
-  public SaleItemDto updateSaleI(@PathVariable Long id, @RequestBody SaleItemCreateDto saleItemCreateDto) {
+  public SaleItemDto updateSaleI(@PathVariable Long id,
+      @RequestBody SaleItemCreateDto saleItemCreateDto) {
     return SaleItemDto.fromEntity(saleItemService.updateSaleItem(id, saleItemCreateDto.toEntity()));
   }
 
@@ -72,25 +73,13 @@ public class SaleItemController {
   }
 
   @PostMapping("/sales/{saleId}/product/{productId}")
-  public SaleItemDto createSaleIProduct(@PathVariable Long saleId, @PathVariable Long productId, @RequestBody SaleItemCreateDto saleItemCreateDto) {
-    Sales sales = saleService.findSaleById(saleId);
-    if (sales == null) {
-      throw new SaleNotFoundException("Venda não encontrada!");
-    }
+  public SaleItemDto createSaleIProduct(@PathVariable Long saleId, @PathVariable Long productId,
+      @RequestBody SaleItemCreateDto saleItemCreateDto) {
 
-    Product product = productService.findById(productId);
-    if (product == null) {
-      throw new ProductNotFoundException();
-    }
+    SaleItem saleItem = saleItemService.createSaleItemWithProduct(saleId, productId,
+        saleItemCreateDto.quantify());
 
-
-    SaleItem saleItem = new SaleItem();
-    saleItem.setSale(sales);
-    saleItem.setProduct(product);
-    saleItem.setQuantify(saleItemCreateDto.quantify());
-
-    return SaleItemDto.fromEntity(saleItemService.createSaleI(saleItem));
-
+    return SaleItemDto.fromEntity(saleItem);
 
   }
 

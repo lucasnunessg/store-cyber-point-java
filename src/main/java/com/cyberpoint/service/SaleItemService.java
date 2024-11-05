@@ -3,6 +3,7 @@ package com.cyberpoint.service;
 import com.cyberpoint.entity.Product;
 import com.cyberpoint.entity.SaleItem;
 import com.cyberpoint.entity.Sales;
+import com.cyberpoint.exception.ProductNotFoundException;
 import com.cyberpoint.exception.SaleNotFoundException;
 import com.cyberpoint.repository.SaleItemRepository;
 import java.util.Optional;
@@ -94,6 +95,19 @@ public class SaleItemService {
     saleI.setSale(null);
 
     return saleItemRepository.save(saleI);
+  }
+
+  public SaleItem createSaleItemWithProduct(Long saleId, Long productId, Long quantity) {
+    Sales sales = saleService.findSaleById(saleId);
+
+    Product product = productService.findById(productId);
+
+    SaleItem saleItem = new SaleItem();
+    saleItem.setSale(sales);
+    saleItem.setProduct(product);
+    saleItem.setQuantify(quantity);
+
+    return saleItemRepository.save(saleItem);
   }
 
 }
