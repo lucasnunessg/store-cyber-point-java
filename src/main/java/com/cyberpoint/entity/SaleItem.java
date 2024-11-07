@@ -30,8 +30,9 @@ public class SaleItem {
   }
 
 
-  public SaleItem(Long quantify) {
+  public SaleItem(Long quantify, Product product) {
     this.quantify = quantify;
+    this.product = product;
 
   }
 

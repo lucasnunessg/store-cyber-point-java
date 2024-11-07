@@ -1,6 +1,8 @@
 package com.cyberpoint.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -17,6 +19,7 @@ public class Sales {
   @Id
   @GeneratedValue
   private Long id;
+  private Long quantify;
 
   private LocalDateTime saleDate;
 
@@ -24,14 +27,19 @@ public class Sales {
   @JoinColumn(name = "person_id")
   private Person person;
 
-  @OneToMany(mappedBy = "sale")
+  @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
   private List<SaleItem> saleItems;
 
   public Sales() {
   }
 
+  public Sales(Long quantify) {
+    this.quantify = quantify;
+  }
+
   public Sales(LocalDateTime saleDate) {
     this.saleDate = LocalDateTime.now();
+
   }
 
 
@@ -66,5 +74,13 @@ public class Sales {
 
   public void setSaleItems(List<SaleItem> saleItems) {
     this.saleItems = saleItems;
+  }
+
+  public Long getQuantify() {
+    return quantify;
+  }
+
+  public void setQuantify(Long quantify) {
+    this.quantify = quantify;
   }
 }

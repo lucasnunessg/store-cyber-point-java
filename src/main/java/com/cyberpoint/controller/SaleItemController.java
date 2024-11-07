@@ -54,17 +54,6 @@ public class SaleItemController {
     return SaleItemDto.fromEntity(saleItemService.findSaleItemById(id));
   }
 
-  @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public SaleItemDto createSaleI(@RequestBody SaleItemCreateDto SaleItemCreateDto) {
-    return SaleItemDto.fromEntity(saleItemService.createSaleI(SaleItemCreateDto.toEntity()));
-  }
-
-  @PutMapping("/{id}")
-  public SaleItemDto updateSaleI(@PathVariable Long id,
-      @RequestBody SaleItemCreateDto saleItemCreateDto) {
-    return SaleItemDto.fromEntity(saleItemService.updateSaleItem(id, saleItemCreateDto.toEntity()));
-  }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteSaleI(@PathVariable Long id) {

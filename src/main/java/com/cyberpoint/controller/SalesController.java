@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -39,9 +40,17 @@ public class SalesController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public SalesDto create(@RequestBody SalesCreateDto salesCreateDto) throws SaleNotFoundException {
-    return SalesDto.fromEntity(saleService.createSale(salesCreateDto.toEntity()));
+  public SalesDto create(
+      @RequestHeader("Authorization") String token,
+      @RequestBody SalesCreateDto salesCreateDto
+  ) throws SaleNotFoundException {
+    // Remover o prefixo "Bearer " do token, se necessário
+    String tokenValue = token.replace("Bearer ", "");
+
+    // Passar o token e a entidade de venda para `createSale`
+    return SalesDto.fromEntity(saleService.createSale(tokenValue, salesCreateDto));
   }
+
 
   @GetMapping
   public List<SalesDto> getAllSales() {
