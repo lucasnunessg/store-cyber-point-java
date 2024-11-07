@@ -71,6 +71,7 @@ public class SaleService {
     // Encontre o usuário associado ao token
     Person person = personRepository.findByusername(username).orElseThrow(
         PersonNotFoundException::new);
+
     Sales sales = salesCreateDto.toEntity();
     sales.setPerson(person);
 

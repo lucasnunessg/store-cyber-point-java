@@ -24,7 +24,6 @@ public class Product {
   private String description;
   private String category;
   private String image;
-  private Long quantify;
 
   @OneToMany(mappedBy = "product")
   private List<SaleItem> saleItems;
@@ -33,23 +32,14 @@ public class Product {
   public Product() {
   }
 
-  public Product(String name, Double price, String description, String category, String image,
-      Long quantify) {
+  public Product(String name, Double price, String description, String category, String image
+    ) {
     this.name = name;
     this.price = price;
     this.description = description;
     this.category = category;
     this.image = image;
-    this.quantify = quantify;
 
-  }
-
-  public Long getQuantify() {
-    return quantify;
-  }
-
-  public void setQuantify(Long quantify) {
-    this.quantify = quantify;
   }
 
   public Long getId() {
