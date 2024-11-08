@@ -27,7 +27,7 @@ function Products() {
           <div key={product.id}>
           <h2>{product.title}</h2>
           <img src={product.image} alt={product.title}/>
-          <p>{product.description}</p>
+          <p className='description'>{product.description}</p>
           <p>R$ {product.price}</p>
           
           </div>
