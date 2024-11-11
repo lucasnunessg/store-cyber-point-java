@@ -1,5 +1,7 @@
 package com.cyberpoint.security;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +16,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
 
   private final JwtFilter jwtFilter;
 
@@ -26,14 +31,22 @@ public class SecurityConfig {
     this.jwtFilter = jwtFilter;
   }
 
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/**")
+        .allowedOrigins("http://localhost:5173")
+        .allowedMethods("GET", "POST", "PUT", "DELETE")
+        .allowedHeaders("*")
+        .allowCredentials(true);
+
+  }
+
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     return httpSecurity
-        .csrf(
-            AbstractHttpConfigurer::disable) //csrf é o metodo q protege a rota "/" com a tela de login
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        )
+        .csrf(AbstractHttpConfigurer::disable)
+        .cors(withDefaults())
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(authorize -> authorize
             .requestMatchers(HttpMethod.POST, "/persons").permitAll()
             .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
@@ -42,10 +55,8 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.GET, "/sales").permitAll()
             .requestMatchers(HttpMethod.GET, "/sales/{id}").permitAll()
             .requestMatchers(HttpMethod.GET, "/sale-product").permitAll()
-            .requestMatchers(HttpMethod.POST, "/sale-product/sales/{saleId}/product/{productId}")
-            .permitAll()
-            .requestMatchers(HttpMethod.GET, "/sale-product/sales/{saleId}/product/{productId}")
-            .permitAll()
+            .requestMatchers(HttpMethod.POST, "/sale-product/sales/{saleId}/product/{productId}").permitAll()
+            .requestMatchers(HttpMethod.GET, "/sale-product/sales/{saleId}/product/{productId}").permitAll()
             .anyRequest().authenticated()
         )
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
@@ -54,8 +65,7 @@ public class SecurityConfig {
 
   @Bean
   public AuthenticationManager authenticationManager(
-      AuthenticationConfiguration authenticationConfiguration) //pra poder usar no controller
-      throws Exception {
+      AuthenticationConfiguration authenticationConfiguration) throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
 
@@ -63,6 +73,4 @@ public class SecurityConfig {
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-  //vai usar pra mostrar qual criptografia foi usado p falar p springsecurity p salvar a senha da pessoa no banco
-
 }
