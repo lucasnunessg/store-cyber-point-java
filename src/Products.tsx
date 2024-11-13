@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Product from './interface/Product';
 import api from './FetchApi';
 
+
 function Products() {
   const [products, setProducts] = useState<Product[]>([]);
 

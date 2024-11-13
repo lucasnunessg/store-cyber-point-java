@@ -1,11 +1,11 @@
-import Login from './Login';
+import Login from "./Login";
 
 function Header() {
 
   const name = "Cyber Point"
   return(
     <div>
-   <Login />
+      <Login />
    <h1>{name} </h1>
     </div>
  

@@ -1,26 +1,38 @@
-import React, { useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import api from './FetchApi';
 
 function Login() {
-  const [username, setUsername] = useState<string>(""); 
+  const [username, setUsername] = useState(""); 
   const [password, setPassword] = useState<string>(""); 
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleLogin = async (event: React.FormEvent) => {
+  const handleUsername = (event: ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
-    setError(null) //limpa erros anteriores
+    setError(null);
+    console.log("Tentando fazer login...");
     try {
-      const responseLogin = await api.post("/auth/login", {
+      const response = await api.post("/auth/login", {
         username, 
         password
       });
+      
+      // Agora estamos usando 'response' ao invés de 'responseLogin'
+      if (response.status === 200) {
+        console.log("Resposta de login bem-sucedida:", response.data);
+        // Aqui você pode navegar para outra página se necessário
+        // navigate('/products');
+      }
     } catch (error) {
-      setError("Login falhou!")
-      console.error("Login failed:", error);
-    } finally{
-      setLoading(false);
+      console.error("Falha no login:", error);
+      setError("Erro ao fazer login. Verifique as credenciais e tente novamente.");
     }
   }
 
@@ -33,7 +45,7 @@ function Login() {
             type="text"
             id="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={handleUsername}
             required
           />
         </div>
@@ -43,14 +55,12 @@ function Login() {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
+        <button type="submit">Login</button> 
       </form>
     </div>
   );
