@@ -1,12 +1,20 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import api from './FetchApi';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
+
+interface DecodedToken {
+    sub: string;
+    role: string;
+  };
 
 function Login() {
   const [username, setUsername] = useState(""); 
   const [password, setPassword] = useState<string>(""); 
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+
 
   const handleUsername = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -19,23 +27,27 @@ function Login() {
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
-    console.log("Tentando fazer login...");
-    try {
-      const response = await api.post("/auth/login", {
-        username, 
-        password
-      });
-      
-      // Agora estamos usando 'response' ao invés de 'responseLogin'
-      if (response.status === 200) {
-        console.log("Resposta de login bem-sucedida:", response.data);
-        // Aqui você pode navegar para outra página se necessário
+    axios.post("http://localhost:8080/auth/login", {
+        username: username, 
+        password: password
+      }).then((response) => {
+        const token = response.data.token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        localStorage.setItem('token', token);
+        const decodedToken = jwtDecode<DecodedToken>(token);
+        const userName = decodedToken.sub;
+        setUsername(userName);
+        localStorage.setItem('username', userName);
        navigate('/products');
-      }
-    } catch (error) {
-      console.error("Falha no login:", error);
-      setError("Erro ao fazer login. Verifique as credenciais e tente novamente.");
-    }
+        
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+
+        setError(error.response?.data.message || 'An error occurred')
+      });    
+     
+          
   }
 
   return (
