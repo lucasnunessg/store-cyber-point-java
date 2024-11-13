@@ -1,10 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import api from './FetchApi';
 
 function Login() {
   const [username, setUsername] = useState(""); 
   const [password, setPassword] = useState<string>(""); 
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleUsername = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -28,7 +30,7 @@ function Login() {
       if (response.status === 200) {
         console.log("Resposta de login bem-sucedida:", response.data);
         // Aqui você pode navegar para outra página se necessário
-        // navigate('/products');
+       navigate('/products');
       }
     } catch (error) {
       console.error("Falha no login:", error);
