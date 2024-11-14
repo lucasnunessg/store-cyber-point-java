@@ -15,7 +15,16 @@ function MainRoute() {
         <img src="https://avatars.githubusercontent.com/u/874086?s=280&v=4" alt="JUnit" width="50" />
 
       </div>
+
+      <section>
+        <p>Para acessar os produtos</p>
+        <a href= "/products" target="_blank">Clique aqui</a>
+      </section>
       <footer>
+        <br>
+        </br>
+        <br>
+        </br>
 
       <h3>Contato:</h3>
       <div style={{ display: "flex", gap: "20px" }}>

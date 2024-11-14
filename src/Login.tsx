@@ -39,7 +39,7 @@ function Login() {
         setUsername(userName);
         localStorage.setItem('username', userName);
        navigate('/products');
-        
+      window.location.reload();        
       })
       .catch((error) => {
         console.error('Error:', error);
