@@ -11,6 +11,9 @@ function Products({ onNextPageClick }: ApiProps) {
   const [startExibition, setStartExibition] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const [search, setSearch] = useState<string>("");
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setmaxPrice] = useState<number>(10000);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const productPerPage = 5;
 
   useEffect(() => {
@@ -49,12 +52,23 @@ function Products({ onNextPageClick }: ApiProps) {
     setStartExibition(0); // Reset para a primeira página ao buscar
   };
 
-  // Filtrar os produtos com base no termo de busca
-  const filteredProducts = products.filter(product =>
-    product.name?.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+    setSelectedCategories(prev => 
+      checked ? [...prev, value] : prev.filter(category => category !== value)
+    );
+  };
 
-  console.log("Produtos filtrados:", filteredProducts); // Verificar o conteúdo de filteredProducts
+  // Filtrar os produtos com base no termo de busca
+  const filteredProducts = products
+    .filter(product =>
+      product.name.toLowerCase().includes(search.toLowerCase()) &&
+      product.price >= minPrice && product.price <= maxPrice &&
+      (selectedCategories.length === 0 || selectedCategories.includes(product.category.toLowerCase()))
+    );
+    
+
+
 
   const isPreviousDisabled = startExibition === 0;
   const isNextDisabled = startExibition + productPerPage >= filteredProducts.length;
@@ -71,6 +85,45 @@ function Products({ onNextPageClick }: ApiProps) {
         />
         <button onClick={returnPage} disabled={isPreviousDisabled}>Página anterior</button>
         <button onClick={handleNextPage} disabled={isNextDisabled}>Próxima</button>
+      </div>
+
+      <div>
+        <label>Preço Mínimo</label>
+        <input
+          type="number"
+          value={minPrice}
+          onChange={(e) => setMinPrice(Number(e.target.value))}
+        />
+        <label>Preço Máximo</label>
+        <input
+          type="number"
+          value={maxPrice}
+          onChange={(e) => setmaxPrice(Number(e.target.value))}
+        />
+      </div>
+
+      <div>
+        <h3>Categorias</h3>
+        {/* Exemplo de categorias, adapte conforme o seu backend */}
+        <label>
+          <input
+            type="checkbox"
+            value="electronic"
+            checked={selectedCategories.includes('electronic')}
+            onChange={handleCategoryChange}
+          />
+          Eletrônicos
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="peripheral"
+            checked={selectedCategories.includes('peripheral')}
+            onChange={handleCategoryChange}
+          />
+          Periféricos
+        </label>
+        {/* Adicione mais categorias conforme necessário */}
       </div>
 
       {loading ? (
