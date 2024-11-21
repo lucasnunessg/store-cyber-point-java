@@ -36,7 +36,12 @@ public class AuthController {
 
       Authentication auth = authenticationManager.authenticate(usernamePassword);
 
-      String token = tokenService.generateToken(auth.getName());
+      String role = auth.getAuthorities().stream()
+          .findFirst() //encontrar a primeira role q tiver
+          .map(Object::toString) // tansformar numa string
+          .orElseThrow(() -> new RuntimeException("Role não encontrada!"));
+
+      String token = tokenService.generateToken(auth.getName(), role);
 
       return ResponseEntity.ok(new TokenDto(token));
 

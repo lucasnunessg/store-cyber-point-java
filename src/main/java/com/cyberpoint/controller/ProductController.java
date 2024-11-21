@@ -34,7 +34,7 @@ public class ProductController {
   }
 
   @PostMapping
-  @PreAuthorize("hasAuthority('ADMIN')")
+  @PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<ProductDto> createProduct(@RequestBody ProductCreateDto productCreateDto) {
     Optional<Product> existingProduct = productService.findProductByName(productCreateDto.name());
@@ -71,9 +71,10 @@ public class ProductController {
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('ADMIN')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public ResponseEntity<String> deleteProduct(@PathVariable Long id)
-      throws ProductNotFoundException { //dto nao é util aqui, so em get, post e put
+      throws ProductNotFoundException {
     productService.deleteProduct(id);
     return ResponseEntity.ok("Produto deletado com sucesso!");
   }
