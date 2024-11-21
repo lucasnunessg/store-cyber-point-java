@@ -1,15 +1,25 @@
-import Header from './Header'
-import './App.css'
-import Products from './Products.tsx'
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+
+import './App.css';
+import Products from './Products.tsx';
+import Header from './Header.tsx';
+import Persons from './Persons.tsx';
+import MainRoute from './MainRoute.tsx';
+import AddProducts from './AddProducts.tsx';
 
 function App() {
-
   return (
-    <>
- <Header />
- <Products />
-    </>
-  )
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainRoute />} />
+        <Route path="/productss" element= {<AddProducts />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/persons" element={<Persons />} />
+      </Routes>
+      </BrowserRouter>
+
+  );
 }
 
-export default App
+export default App;
