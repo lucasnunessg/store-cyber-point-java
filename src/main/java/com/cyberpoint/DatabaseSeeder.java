@@ -43,9 +43,9 @@ public class DatabaseSeeder implements CommandLineRunner {
     products.add(new Product("Cadeira gamer", 1500d, "Cadeira ergonômica", "electronic",
         "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRA8skCQjfadR_IwFKCbHBIQGOglbKGOESbkBGxE7w64Sy1wa7SWHBRSM4cd1bdWOYQu6cQLOuFCIyPjwuVU_Zb0AExrSxPubrYDlDTCsyw9xE-WwvIHAN9&usqp=CAE"));
 
-    products.add(new Product("Teclado Mecânico RGB", 300d, "Teclado com iluminação RGB", "electronic",
+    products.add(new Product("Teclado Mecânico RGB", 300d, "Teclado com iluminação RGB", "peripheral",
         "https://images.tcdn.com.br/img/img_prod/406359/teclado_gamer_semi_mecanico_anti_ghosting_suporte_para_celular_revestimento_em_metal_clanm_cl_tm8153_4997_2_0f8b4437b36be18c510fed281b159d80.jpg"));
-    products.add(new Product("Mouse Gamer", 150d, "Mouse ergonômico com sensor óptico", "electronic",
+    products.add(new Product("Mouse Gamer", 150d, "Mouse ergonômico com sensor óptico", "peripheral",
         "https://cdn.awsli.com.br/2500x2500/2602/2602619/produto/240442636/mouse-gamer-razer-cobra-rgb-6-botoes-programaveis-8500-dpi-black-rz0104650100r3u-33mbetfesk.jpg"));
     products.add(new Product("Monitor 24 polegadas", 900d, "Monitor Full HD 24 polegadas", "electronic",
         "https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/oficinadosbits/media/uploads/produtos/foto/hkqqjqsm/file.png"));

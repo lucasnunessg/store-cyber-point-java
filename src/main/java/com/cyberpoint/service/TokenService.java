@@ -3,6 +3,7 @@ package com.cyberpoint.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.cyberpoint.exception.LoginErrorException;
+import com.cyberpoint.security.Role;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,9 +19,10 @@ public class TokenService {
 
   }
 
-  public String generateToken(String username) {
+  public String generateToken(String username, String role) {
     return JWT.create()
         .withSubject(username)
+        .withClaim("role", role)
         .withExpiresAt(generateExpiration())
         .sign(algorithm);
   }
@@ -35,6 +37,13 @@ public class TokenService {
         .build()
         .verify(token)
         .getSubject();
+  }
+
+  public String getRoleFromToken(String token) {
+    return JWT.require(algorithm)
+        .build()
+        .verify(token)
+        .getClaim("role").asString();
   }
 
 }
