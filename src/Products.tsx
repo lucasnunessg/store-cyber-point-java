@@ -202,8 +202,7 @@ function Products({ onNextPageClick }: ApiProps) {
                 </>
               )}
 
-              {/* Exibe o EditProduct abaixo do produto, caso o produto esteja sendo editado */}
-              {editingProduct && editingProduct.id === product.id && (
+              {editingProduct && editingProduct.id === product.id && ( //pra cada produto ter a opção de edição em si mesmo
                 <div>
                   <EditProduct
                     product={editingProduct}
