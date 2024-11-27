@@ -94,8 +94,9 @@ function Login() {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Login</button> 
         <button type="button" onClick={handleLogout}>Logout</button> {}
-        <PersonRegister />
       </form>
+      <PersonRegister />
+
     </div>
   );
 }

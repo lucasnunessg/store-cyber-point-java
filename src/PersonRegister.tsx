@@ -4,7 +4,7 @@ import api from './FetchApi';
 const PersonRegister = () => {
   const [fullName, setFullName] = useState("");
   const [username, setUserName] = useState("");
-  const [role] = useState("ROLE_CLIENT")
+  const [role] = useState("CLIENT")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
@@ -13,19 +13,19 @@ const PersonRegister = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
 
   const handleCreatePerson = async (event: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
+    event.preventDefault();
     try{
       const newPerson = {
-        fullName,
+        fullname: fullName, //aqui tive q mudar pra fullname: fullName, antes tava fullName e no java esta fullname
         username,
-        role,
         email,
         password,
-        address
+        address,
+        role,
       }
       const response = await api.post("/persons", newPerson);
       setSuccess("Pessoa criada com sucesso!")
-      console.log(response.data);
+      console.log(response.data); 
 
       if(response.status === 201) {
         clearForm();
@@ -34,21 +34,22 @@ const PersonRegister = () => {
       }
       
     }catch(error) {
+      setError('Erro ao criar cliente. Por favor, tente novamente.');
       console.error("Erro ao criar pessoa", error);
+      clearForm();
     }
   }
 
 
   const clearForm = () => {
     setFullName('');
-    setAddress('');
-    setPassword('');
     setUserName('');
     setEmail('');
+    setPassword('');
+    setAddress('');
   }
 
   const cancelHandle = () => {
-    window.location.reload()
     setShowForm(false)
     clearForm()
   };
@@ -95,7 +96,7 @@ const PersonRegister = () => {
 
       </div>
       {error && <p style={{ color: 'red' }} >{error}</p>}
-      <button type='submit'>Cadastrar</button>
+      <button type="submit">Cadastrar</button>
       <button type='button' onClick={cancelHandle}>Limpar</button>
     </form>
   )}
