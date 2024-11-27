@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
+import PersonRegister from './PersonRegister';
 
 interface DecodedToken {
   sub: string;
@@ -59,7 +60,7 @@ function Login() {
       window.location.reload();
     } catch (error: any) {
       console.error('Error:', error);
-      setError(error.response?.data.message || 'An error occurred');
+      setError(error.response?.data.message || 'Login ou senha inválidos');
       setWelcomeUsernameFromToken(null);
     }
   };
@@ -92,8 +93,8 @@ function Login() {
         )}
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Login</button> 
-        <button type="button" onClick={handleLogout}>Logout</button> {/* Botão de logout */}
- 
+        <button type="button" onClick={handleLogout}>Logout</button> {}
+        <PersonRegister />
       </form>
     </div>
   );
