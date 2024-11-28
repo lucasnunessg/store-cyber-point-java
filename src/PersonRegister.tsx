@@ -16,7 +16,7 @@ const PersonRegister = () => {
     event.preventDefault();
     try{
       const newPerson = {
-        fullname: fullName, //aqui tive q mudar pra fullname: fullName, antes tava fullName e no java esta fullname
+        fullname: fullName, //aqui tive q mudar pra "fullname: fullName", antes tava fullName e no java esta fullname
         username,
         email,
         password,
