@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import PersonRegister from './PersonRegister';
+import ForgotPassword from './ForgotPassword';
 
 interface DecodedToken {
   sub: string;
@@ -27,7 +28,7 @@ function Login() {
   useEffect(() => {
     const storedUserName = localStorage.getItem('username');
     setWelcomeUsernameFromToken(storedUserName);
-  })
+  }, [])
 
   const handleUsername = (event: ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -96,6 +97,7 @@ function Login() {
         <button type="button" onClick={handleLogout}>Logout</button> {}
       </form>
       <PersonRegister />
+      <ForgotPassword />
 
     </div>
   );
