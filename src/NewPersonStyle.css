@@ -1,0 +1,112 @@
+/* Estilo para o formulário de cadastro */
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1c1c1c, #252525); /* Fundo com gradiente */
+  border: 1px solid #444; /* Borda cinza escura */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra mais discreta */
+  font-family: 'Roboto', sans-serif; /* Fonte limpa */
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2c2c2c; /* Fundo mais claro */
+  border: 1px solid #555; /* Borda cinza */
+  border-radius: 4px; /* Bordas menos arredondadas */
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: #e63946; /* Borda vermelha ao focar */
+}
+
+.form-input::placeholder {
+  color: #888;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.btn-submit,
+.btn-cancel {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #e63946; /* Fundo vermelho */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #ff4d6d; /* Vermelho mais claro ao passar o mouse */
+}
+
+.cadastro {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+
+.button-cadastro {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #e63946; /* Vermelho principal */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button-cadastro:hover {
+  background-color: #ff4d6d; /* Vermelho mais claro ao passar o mouse */
+}
+
+.button-cadastro:active {
+  transform: scale(0.95); /* Efeito ao pressionar */
+}
+
+.btn-cancel {
+  background-color: #444; /* Fundo cinza escuro */
+}
+
+.btn-cancel:hover {
+  background-color: #666; /* Fundo cinza mais claro ao passar o mouse */
+}
+
+.error-message {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+body {
+  background-color: #121212; /* Fundo escuro geral */
+  color: #fff; /* Texto branco */
+  font-family: 'Roboto', sans-serif;
+}

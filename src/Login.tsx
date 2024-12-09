@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 import PersonRegister from './PersonRegister';
 import ForgotPassword from './ForgotPassword';
+import './LoginStyle.css'
 
 interface DecodedToken {
   sub: string;
@@ -67,38 +68,39 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Username</label>
+    <div className="login-page-container">
+      <form onSubmit={handleLogin} className="login-form-container">
+        <div className="input-group">
+          <label htmlFor="username" className="input-label">Username</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={handleUsername}
             required
+            className="username-input-field"
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className="input-group">
+          <label htmlFor="password" className="input-label">Password</label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
             required
+            className="password-input-field"
           />
         </div>
         {welcomeUsernameFromToken && (
-          <h3>Seja bem-vindo, {welcomeUsernameFromToken}!</h3>
+          <h3 className="welcome-message-text">Seja bem-vindo, {welcomeUsernameFromToken}!</h3>
         )}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Login</button> 
-        <button type="button" onClick={handleLogout}>Logout</button> {}
+        {error && <p className="login-error-message">{error}</p>}
+        <button type="submit" className="login-submit-btn">Login</button> 
+        <button type="button" onClick={handleLogout} className="logout-btn">Logout</button> 
       </form>
       <PersonRegister />
       <ForgotPassword />
-
     </div>
   );
 }

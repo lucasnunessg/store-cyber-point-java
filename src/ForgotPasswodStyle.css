@@ -1,0 +1,107 @@
+/* Estilo geral para o formulário de redefinição de senha */
+.forgot-password-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1c1c1c, #252525); /* Fundo com gradiente */
+  border: 1px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Estilo do título */
+.form-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Estilo do botão "Esqueceu a senha?" */
+.forgot-password-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #e63946;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  display: inline-block;
+}
+
+.forgot-password-button:hover {
+  background-color: #ff4d6d; /* Vermelho mais claro */
+}
+
+/* Estilo do formulário de redefinição */
+.form-forgot-password {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Estilo dos grupos de entrada */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-label {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Estilo do campo de entrada */
+.input-forgot-password {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2c2c2c;
+  border: 1px solid #555;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-forgot-password:focus {
+  border-color: #e63946; /* Borda vermelha ao focar */
+}
+
+.input-forgot-password::placeholder {
+  color: #888;
+}
+
+/* Estilo do botão para envio */
+.button-forgot-password {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #e63946;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button-forgot-password:hover {
+  background-color: #ff4d6d; /* Vermelho mais claro */
+}
+
+.button-forgot-password:active {
+  transform: scale(0.95);
+}
+
+/* Estilo da mensagem de erro ou sucesso */
+.message {
+  color: #e63946; /* Vermelho para erros ou mensagens de sucesso */
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}

@@ -1,0 +1,196 @@
+/* Estilo geral para a página de Produtos */
+.products-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1c1c1c, #252525); /* Fundo com gradiente */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra suave */
+  font-family: 'Roboto', sans-serif; /* Fonte limpa */
+}
+
+/* Título da página de produtos */
+.products-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-align: center;
+}
+
+/* Estilo para os filtros de busca */
+.filters-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.filters-container p {
+  margin: 0;
+  color: #fff;
+  font-size: 1rem; /* Deixando os títulos um pouco menores */
+}
+
+.filters-container input {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2c2c2c;
+  border: 1px solid #555;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.filters-container input:focus {
+  border-color: #e63946;
+}
+
+.filters-container .search-input {
+  font-size: 0.9rem; 
+  padding: 0.1rem 0.8rem;
+  height: 2rem;
+  line-height: 1.5rem;
+}
+
+.filters-container button {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #e63946;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.filters-container button:hover {
+  background-color: #ff4d6d;
+}
+
+.filters-container button:active {
+  transform: scale(0.95);
+}
+
+/* Estilo para as categorias */
+.categories-container {
+  margin-bottom: 1.5rem;
+}
+
+.categories-container label {
+  margin-right: 1rem;
+  color: #fff;
+}
+
+.categories-container input {
+  margin-right: 0.5rem;
+}
+
+/* Estilo para a lista de produtos */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.product-item {
+  background-color: #2c2c2c;
+  border: 1px solid #555;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.product-item h2 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.product-item p.description {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.product-item p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e63946;
+}
+
+/* Botões de edição e exclusão */
+.product-item button {
+  background-color: #e63946;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-right: 0.5rem;
+}
+
+.product-item button:hover {
+  background-color: #ff4d6d;
+}
+
+.product-item button:active {
+  transform: scale(0.95);
+}
+
+.product-item button.delete {
+  background-color: #444;
+}
+
+.product-item button.delete:hover {
+  background-color: #666;
+}
+
+/* Paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination button {
+  background-color: #e63946;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #ff4d6d;
+}
+
+.pagination button:active {
+  transform: scale(0.95);
+}
+
+.pagination button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+.pagination button:disabled:hover {
+  background-color: #444;
+}

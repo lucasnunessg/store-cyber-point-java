@@ -1,0 +1,126 @@
+/* Estilo para o formulário de login */
+.login-page-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, #1c1c1c, #252525); /* Fundo com gradiente */
+  border: 1px solid #444; /* Borda cinza escura */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra mais discreta */
+  font-family: 'Roboto', sans-serif; /* Fonte limpa */
+}
+
+/* Estilo para o formulário */
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Estilo para os grupos de entrada */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Estilo para os rótulos de entrada */
+.input-label {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* Estilo para os campos de entrada */
+.username-input-field,
+.password-input-field {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #2c2c2c; /* Fundo mais claro */
+  border: 1px solid #555; /* Borda cinza */
+  border-radius: 4px; /* Bordas menos arredondadas */
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.username-input-field:focus,
+.password-input-field:focus {
+  border-color: #e63946; /* Borda vermelha ao focar */
+}
+
+.username-input-field::placeholder,
+.password-input-field::placeholder {
+  color: #888;
+}
+
+/* Estilo para a mensagem de boas-vindas */
+.welcome-message-text {
+  font-size: 1.2rem;
+  color: #28a745; /* Cor verde para boas-vindas */
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Estilo para mensagens de erro */
+.login-error-message {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+  text-align: center;
+}
+
+/* Estilo para os botões */
+.login-submit-btn,
+.logout-btn {
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #e63946; /* Fundo vermelho */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-submit-btn:hover,
+.logout-btn:hover {
+  background-color: #ff4d6d; /* Vermelho mais claro ao passar o mouse */
+}
+
+.login-submit-btn:active,
+.logout-btn:active {
+  transform: scale(0.95); /* Efeito ao pressionar */
+}
+
+/* Estilo para o botão de logout */
+.logout-btn {
+  background-color: #444; /* Fundo cinza escuro */
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Estilo para a seção de cadastro e recuperação de senha */
+.cadastro,
+.forgot-password {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.cadastro a,
+.forgot-password a {
+  color: #e63946;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cadastro a:hover,
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+body {
+  background-color: #121212; /* Fundo escuro geral */
+  color: #fff; /* Texto branco */
+  font-family: 'Roboto', sans-serif;
+}

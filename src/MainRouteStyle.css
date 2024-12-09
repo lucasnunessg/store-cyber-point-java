@@ -1,0 +1,130 @@
+/* Estilo para o MainRoute */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #121212, #1a1a1a); /* Fundo escuro com gradiente suave */
+  font-family: 'Roboto', sans-serif;
+  padding: 2rem;
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Seção do título principal */
+.project-info {
+  margin-bottom: 2rem;
+}
+
+.project-info h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e63946; /* Vermelho suave para o título */
+  margin-bottom: 1rem;
+}
+
+/* Título da seção de tecnologias */
+.technologies-title {
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Contêiner das tecnologias */
+.technologies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px; /* Espaço entre os ícones */
+  margin-bottom: 2rem;
+  padding: 0 1rem; /* Adiciona um pouco de espaço nas laterais */
+  max-width: 100%; /* Evita que as imagens saiam da tela */
+}
+
+/* Estilo para os ícones das tecnologias */
+.technology-icon {
+  width: 60px; /* Tamanho das imagens */
+  height: 60px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.technology-icon:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+/* Link para produtos */
+.product-link {
+  margin-bottom: 2rem;
+}
+
+.product-link p {
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+}
+
+.product-link-text {
+  font-size: 1.2rem;
+  color: #e63946;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.product-link-text:hover {
+  color: #ff4d6d; /* Cor mais clara ao passar o mouse */
+}
+
+/* Rodapé */
+.footer {
+  width: 100%;
+  padding: 2rem 0;
+  background-color: #1c1c1c;
+  position: relative;
+  text-align: center;
+  margin-top: 2rem; /* Ajustado para não ficar exageradamente no fundo */
+}
+
+.contact-title {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-link {
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Destacar o ícone do GitHub */
+.social-link.github:hover .social-icon {
+  transform: scale(1.5); /* Aumenta mais o ícone do GitHub */
+  border: 2px solid #e63946; /* Adiciona uma borda vermelha */
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Sombra no ícone do GitHub */
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+br {
+  margin-bottom: 1rem;
+}

@@ -8,10 +8,10 @@ const ResetPassword = () => {
   const [message, setMessage] = useState<string>("");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
-
-  const token = searchParams.get("token"); 
-  console.log(token)
+  
+  const token = searchParams.get("token");
+  console.log("Token aqui: ", token);
+  
 
   useEffect(() => {
     if (!token) {
@@ -41,6 +41,10 @@ const ResetPassword = () => {
       setMessage("Erro interno de servidor. Por favor, tente novamente.");
     }
   };
+
+  if (!token) {
+    return <p>Carregando...</p>;
+  }
 
   return (
     <div>

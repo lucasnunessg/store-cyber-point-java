@@ -1,9 +1,5 @@
+const numeros = [1,2,3,4,5]
 
+const filtros = numeros.filter(numero => numero >= 4)
 
-for(let n = 2; n <= 1000; n *=2)
-
-console.log(n)
-
-
-
-
+console.log(filtros);

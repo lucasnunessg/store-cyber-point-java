@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import api from './FetchApi';
+import './NewPersonStyle.css'
 
 const PersonRegister = () => {
   const [fullName, setFullName] = useState("");
   const [username, setUserName] = useState("");
-  const [role] = useState("CLIENT")
+  const [role] = useState("CLIENT");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
@@ -14,32 +15,30 @@ const PersonRegister = () => {
 
   const handleCreatePerson = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try{
+    try {
       const newPerson = {
-        fullname: fullName, //aqui tive q mudar pra "fullname: fullName", antes tava fullName e no java esta fullname
+        fullname: fullName,
         username,
         email,
         password,
         address,
         role,
-      }
+      };
       const response = await api.post("/persons", newPerson);
-      setSuccess("Pessoa criada com sucesso!")
-      console.log(response.data); 
+      setSuccess("Pessoa criada com sucesso!");
+      console.log(response.data);
 
-      if(response.status === 201) {
+      if (response.status === 201) {
         clearForm();
-      }else {
-        setError("Erro ao criar pessoa!")
+      } else {
+        setError("Erro ao criar pessoa!");
       }
-      
-    }catch(error) {
+    } catch (error) {
       setError('Erro ao criar cliente. Por favor, tente novamente.');
       console.error("Erro ao criar pessoa", error);
       clearForm();
     }
-  }
-
+  };
 
   const clearForm = () => {
     setFullName('');
@@ -47,63 +46,82 @@ const PersonRegister = () => {
     setEmail('');
     setPassword('');
     setAddress('');
-  }
-
-  const cancelHandle = () => {
-    setShowForm(false)
-    clearForm()
   };
 
-  return(
+  const cancelHandle = () => {
+    setShowForm(false);
+    clearForm();
+  };
+
+  return (
     <>
-  <p>Não é cadastrado? Cadastre-se!</p>
-  {!showForm && (
-    <button onClick={() => setShowForm(true)}>Criar conta</button>
-  )}   
-  {showForm && (
-    <form onSubmit={handleCreatePerson}>
-      <div>
-        <label>Nome completo</label>
-        <input
-        type='text'
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)} />
+      <p className='cadastro'>Não é cadastrado? Cadastre-se!</p>
+      {!showForm && (
+        <button className='button-cadastro' onClick={() => setShowForm(true)}>Criar conta</button>
+      )}
+      {showForm && (
+        <form onSubmit={handleCreatePerson} className="form-container">
+          <div className="form-group">
+            <label>Nome completo</label>
+            <input
+              type='text'
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              className="form-input"
+            />
+          </div>
 
-        <label>Nome de usuário</label>
-        <input
-        type='text'
-        value={username}
-        onChange={(e) => setUserName(e.target.value)} />
+          <div className="form-group">
+            <label>Nome de usuário</label>
+            <input
+              type='text'
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+              className="form-input"
+            />
+          </div>
 
-        <label>E-mail</label>
-        <input
-        type='text'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)} />
+          <div className="form-group">
+            <label>E-mail</label>
+            <input
+              type='text'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-input"
+            />
+          </div>
 
-        <label>Senha</label>
-        <input
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)} />
+          <div className="form-group">
+            <label>Senha</label>
+            <input
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-input"
+            />
+          </div>
 
+          <div className="form-group">
+            <label>Endereço</label>
+            <input
+              type='text'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="form-input"
+            />
+          </div>
 
-        <label>Endereço</label>
-        <input
-        type='text'
-        value={address}
-        onChange={(e) => setAddress(e.target.value)} />
+          {error && <p className="error-message">{error}</p>}
 
-      </div>
-      {error && <p style={{ color: 'red' }} >{error}</p>}
-      <button type="submit">Cadastrar</button>
-      <button type='button' onClick={cancelHandle}>Limpar</button>
-    </form>
-  )}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
-
+          <div className="form-buttons">
+            <button type="submit" className="btn-submit">Cadastrar</button>
+            <button type='button' onClick={cancelHandle} className="btn-cancel">Limpar</button>
+          </div>
+        </form>
+      )}
+      {success && <p className="success-message">{success}</p>}
     </>
-  )
-}
+  );
+};
 
-  export default PersonRegister;
+export default PersonRegister;

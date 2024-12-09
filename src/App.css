@@ -37,12 +37,15 @@
 
 /* Adicionando imagem de fundo para todo o site */
 body {
-  background-image: url('https://img.freepik.com/vetores-gratis/fundo-abstrato-com-hexagonos_23-2148995949.jpg?t=st=1731025779~exp=1731029379~hmac=01e57b0525b375e5c445fe76891889ef62d5359f7454d690273e3921ed60f6cc&w=1380');
-  background-size: contain; /* Ajusta a imagem para caber na tela sem distorcer */
+  background-color: black;
+  background-size: cover; /* A imagem vai cobrir toda a tela */
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat; /* Impede que a imagem se repita */
   margin: 0;
   font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
 }
 
 .card {

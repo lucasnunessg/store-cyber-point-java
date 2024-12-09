@@ -5,6 +5,7 @@ import AddProducts from './AddProducts';
 import { jwtDecode } from 'jwt-decode';
 import DeleteProduct from './DeleteProduct';
 import EditProduct from './EditProduct';
+import './ProductsStyle.css'
 
 interface ApiProps {
   onNextPageClick?: () => void;
@@ -14,14 +15,14 @@ function Products({ onNextPageClick }: ApiProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [startExibition, setStartExibition] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-  const [deleteProductId, setDeleteProductId] = useState<number | null>(null); // Estado para controlar qual produto será excluído.
+  const [deleteProductId, setDeleteProductId] = useState<number | null>(null);
   const [search, setSearch] = useState<string>("");
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setmaxPrice] = useState<number>(10000);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const productPerPage = 5;
+  const productPerPage = 4;
 
   interface DecodedToken {
     role: string;
@@ -113,7 +114,6 @@ function Products({ onNextPageClick }: ApiProps) {
     setDeleteProductId(null);
   };
 
-  // Filtrar os produtos com base no termo de busca
   const filteredProducts = products
     .filter(product =>
       product.name.toLowerCase().includes(search.toLowerCase()) &&
@@ -125,110 +125,104 @@ function Products({ onNextPageClick }: ApiProps) {
   const isNextDisabled = startExibition + productPerPage >= filteredProducts.length;
 
   if (isAuthenticated === null) {
-    return <p>Verificando autenticação...</p>;
+    return <p className="auth-check">Verificando autenticação...</p>;
   }
 
   return (
-    <div>
-      <h1>Produtos</h1>
-      <div>
-        <input
-          type='text'
-          placeholder='Digite o nome do produto'
-          value={search}
-          onChange={searchProducts}
-        />
-        <button onClick={returnPage} disabled={isPreviousDisabled}>Página anterior</button>
-        <button onClick={handleNextPage} disabled={isNextDisabled}>Próxima</button>
-      </div>
-
-      <div>
-        <label>Preço Mínimo</label>
+    <div className="products">
+    <h1 className="products-title">Produtos</h1>
+  
+    <div className="filters-container">
+      <p>Digite o nome do produto:</p>
+      <input
+        type="text"
+        placeholder="Digite o nome do produto"
+        value={search}
+        onChange={searchProducts}
+        className="search-input"
+      />
+  
+      <div className="price-filter">
+        <p>Filtrar por Preço:</p>
         <input
           type="number"
+          className="price-input"
+          placeholder="Preço Mínimo"
           value={minPrice}
           onChange={(e) => setMinPrice(Number(e.target.value))}
         />
-        <label>Preço Máximo</label>
         <input
           type="number"
+          className="price-input"
+          placeholder="Preço Máximo"
           value={maxPrice}
           onChange={(e) => setmaxPrice(Number(e.target.value))}
         />
       </div>
-
-      <div>
-        <h3>Categorias</h3>
-        <label>
-          <input
-            type="checkbox"
-            value="electronic"
-            checked={selectedCategories.includes('electronic')}
-            onChange={handleCategoryChange}
-          />
-          Eletrônicos
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="peripheral"
-            checked={selectedCategories.includes('peripheral')}
-            onChange={handleCategoryChange}
-          />
-          Periféricos
-        </label>
-      </div>
-
-      {isAuthenticated && (
-        <AddProducts />
-      )}
-
-      {loading ? (
-        <p>Carregando produtos...</p>
-      ) : filteredProducts.length === 0 ? (
-        <p>Nenhum produto encontrado.</p>
-      ) : (
-        <ul>
-          {filteredProducts.slice(startExibition, startExibition + productPerPage).map((product) => (
-            <div key={product.id}>
-              <h2>{product.name}</h2>
-              <img src={product.image} alt={product.name} />
-              <p className='description'>{product.description}</p>
-              <p>R$ {product.price}</p>
-              {isAuthenticated && (
-                <>
-                  <button onClick={() => handleEditProduct(product)}>Editar</button>
-                  <DeleteProduct product={product} onDelete={() => handleDeleteProduct(product.id)} onCancel={() => {}} />
-                </>
-              )}
-
-              {editingProduct && editingProduct.id === product.id && ( //pra cada produto ter a opção de edição em si mesmo
-                <div>
-                  <EditProduct
-                    product={editingProduct}
-                    onSave={handleSave}
-                    onCancel={handleCancel}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
-        </ul>
-      )}
-
-      {deleteProductId !== null && (
-        <DeleteProduct
-          product={products.find((product) => product.id === deleteProductId)!}
-          onDelete={handleDeleteProduct}
-          onCancel={handleCancelDelete}
-        />
-      )}
-
-      <div>
-        <button onClick={returnPage} disabled={isPreviousDisabled}>Página anterior</button>
-        <button onClick={handleNextPage} disabled={isNextDisabled}>Próxima</button>
-      </div>
     </div>
+  
+    <div className="categories-container">
+      <label>
+        <input
+          type="checkbox"
+          value="electronic"
+          checked={selectedCategories.includes('electronic')}
+          onChange={handleCategoryChange}
+        />
+        Eletrônicos
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          value="peripheral"
+          checked={selectedCategories.includes('peripheral')}
+          onChange={handleCategoryChange}
+        />
+        Periféricos
+      </label>
+    </div>
+  
+    {isAuthenticated && (
+      <AddProducts />
+    )}
+  
+    {loading ? (
+      <p className="loading">Carregando produtos...</p>
+    ) : filteredProducts.length === 0 ? (
+      <p className="no-products">Nenhum produto encontrado.</p>
+    ) : (
+      <ul className="product-list">
+        {filteredProducts.slice(startExibition, startExibition + productPerPage).map((product) => (
+          <div key={product.id} className="product-item">
+            <h2 className="product-name">{product.name}</h2>
+            <img src={product.image} alt={product.name} className="product-image" />
+            <p className="description">{product.description}</p>
+            <p className="product-price">R$ {product.price}</p>
+            {isAuthenticated && (
+              <>
+                <button onClick={() => handleEditProduct(product)} className="edit-button">Editar</button>
+                <DeleteProduct product={product} onDelete={() => handleDeleteProduct(product.id)} onCancel={() => {}} />
+              </>
+            )}
+            {editingProduct && editingProduct.id === product.id && (
+              <div className="edit-product">
+                <EditProduct
+                  product={editingProduct}
+                  onSave={handleSave}
+                  onCancel={handleCancel}
+                />
+              </div>
+            )}
+          </div>
+        ))}
+      </ul>
+    )}
+  
+    <div className="pagination">
+      <button onClick={returnPage} disabled={isPreviousDisabled} className="pagination-button">Página anterior</button>
+      <button onClick={handleNextPage} disabled={isNextDisabled} className="pagination-button">Próxima</button>
+    </div>
+  </div>
   );
 }
 
