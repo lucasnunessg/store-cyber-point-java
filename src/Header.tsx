@@ -2,7 +2,7 @@ import Login from "./Login";
 
 function Header() {
 
-  const name = "Cyber Point - Ecommerce"
+  const name = "Cyber Point"
 
   
   return(

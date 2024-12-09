@@ -100,7 +100,7 @@
 
 /* Estilo da mensagem de erro ou sucesso */
 .message {
-  color: #e63946; /* Vermelho para erros ou mensagens de sucesso */
+  color: green; /* Vermelho para erros ou mensagens de sucesso */
   font-size: 1rem;
   text-align: center;
   margin-top: 1rem;

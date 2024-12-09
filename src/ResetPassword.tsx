@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import api from "./FetchApi";
+import './ResetPasswordStyle.css'
 
 const ResetPassword = () => {
   const [password, setPassword] = useState<string>("");
@@ -47,30 +48,38 @@ const ResetPassword = () => {
   }
 
   return (
-    <div>
-      <h1>Redefinir Senha</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nova senha:</label>
+    <div className="reset-password-container">
+      <h1 className="reset-password-title">Redefinir Senha</h1>
+      <form onSubmit={handleSubmit} className="reset-password-form">
+        <div className="reset-password-field">
+          <label className="reset-password-label">Nova senha:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="reset-password-input"
             required
           />
         </div>
-        <div>
-          <label>Confirme a nova senha:</label>
+        <div className="reset-password-field">
+          <label className="reset-password-label">Confirme a nova senha:</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            className="reset-password-input"
             required
           />
         </div>
-        <button type="submit">Redefinir Senha</button>
+        <button type="submit" className="reset-password-button">Redefinir Senha</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && (
+        <p 
+          className={`reset-password-message ${message === "Senha redefinida com sucesso!" ? "success" : ""}`}
+        >
+          {message}
+        </p>
+      )}
     </div>
   );
 };
